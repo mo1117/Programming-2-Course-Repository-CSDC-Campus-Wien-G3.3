@@ -51,14 +51,15 @@ public class AppTest {
             Method setter = AppController.class.getMethod("setArticles", List.class);
             Field amount = AppController.class.getField("articleCount");
             List<Article> articles = new LinkedList() {{
-                add(new Article("Author1", "Book1"));
+                add(new Article("Author1", "Article1"));
             }};
 
             setter.invoke(ctrl, articles);
             assertEquals(articles.size(), amount.get(ctrl), "'setArticles' is not working as it should!");
         } catch (Exception e) {
             e.printStackTrace();
-            fail("Method 'setArticles' might be missing.");
+            fail("Method 'setArticles' might be missing." + System.lineSeparator() + "There might also be some other " +
+                    "problems.");
         }
     }
 
@@ -69,16 +70,16 @@ public class AppTest {
             Method setter = AppController.class.getMethod("setArticles", List.class);
             Field amount = AppController.class.getField("articleCount");
             List<Article> toBeDeleted = new LinkedList() {{
-                add(new Article("Author1", "Book1"));
-                add(new Article("Author2", "Book2"));
-                add(new Article("Author3", "Book3"));
-                add(new Article("Author4", "Book4"));
+                add(new Article("Author1", "Article1"));
+                add(new Article("Author2", "Article2"));
+                add(new Article("Author3", "Article3"));
+                add(new Article("Author4", "Article4"));
 
             }};
 
             List<Article> articles = new LinkedList() {{
-                add(new Article("Author1", "Book1"));
-                add(new Article("Author2", "Book2"));
+                add(new Article("Author1", "Article1"));
+                add(new Article("Author2", "Article2"));
             }};
 
             setter.invoke(ctrl, toBeDeleted);
@@ -86,7 +87,8 @@ public class AppTest {
             assertEquals(articles.size(), amount.get(ctrl), "'setArticles' is not working as it should!");
         } catch (Exception e) {
             e.printStackTrace();
-            fail("Method 'setArticles' might be missing.");
+            fail("Method 'setArticles' might be missing." + System.lineSeparator() + "There might also be some other " +
+                    "problems.");
         }
     }
 
@@ -102,7 +104,8 @@ public class AppTest {
             assertEquals(articles.size(), amount.get(ctrl), "'setArticles' is not working as it should!");
         } catch (Exception e) {
             e.printStackTrace();
-            fail("Method 'setArticles' might be missing.");
+            fail("Method 'setArticles' might be missing." + System.lineSeparator() + "There might also be some other " +
+                    "problems.");
         }
     }
 
@@ -132,7 +135,8 @@ public class AppTest {
             assertEquals(articles.size(), getter.invoke(ctrl), "'getArticleCount' is not working as it should! ");
         } catch (Exception e) {
             e.printStackTrace();
-            fail("Method 'getArticleCount' might be missing.");
+            fail("Method 'getArticleCount' might be missing." + System.lineSeparator() + "There might also be some other " +
+                    "problems.");
         }
     }
 
@@ -142,11 +146,11 @@ public class AppTest {
         try {
             Method getter = AppController.class.getMethod("getArticleCount");
             List<Article> articles = new LinkedList() {{
-                add(new Article("Author1", "Book1"));
-                add(new Article("Author2", "Book2"));
-                add(new Article("Author3", "Book3"));
-                add(new Article("Author4", "Book4"));
-                add(new Article("Author5", "Book5"));
+                add(new Article("Author1", "Article1"));
+                add(new Article("Author2", "Article2"));
+                add(new Article("Author3", "Article3"));
+                add(new Article("Author4", "Article4"));
+                add(new Article("Author5", "Article5"));
             }};
 
             Field amount = AppController.class.getField("articleCount");
@@ -154,7 +158,8 @@ public class AppTest {
             assertEquals(articles.size(), getter.invoke(ctrl), "'getArticleCount' is not working as it should! ");
         } catch (Exception e) {
             e.printStackTrace();
-            fail("Method 'getArticleCount' might be missing.");
+            fail("Method 'getArticleCount' might be missing." + System.lineSeparator() + "There might also be some other " +
+                    "problems.");
         }
     }
 
@@ -164,21 +169,22 @@ public class AppTest {
         try {
             Method getter = AppController.class.getMethod("getArticleCount");
             List<Article> articles = new LinkedList() {{
-                add(new Article("Author1", "Book1"));
-                add(new Article("Author2", "Book2"));
-                add(new Article("Author3", "Book3"));
+                add(new Article("Author1", "Article1"));
+                add(new Article("Author2", "Article2"));
+                add(new Article("Author3", "Article3"));
             }};
-            articles.add(new Article("Author4", "Book4"));
-            articles.add(new Article("Author5", "Book5"));
-            articles.add(new Article("Author6", "Book6"));
-            articles.add(new Article("Author7", "Book7"));
+            articles.add(new Article("Author4", "Article4"));
+            articles.add(new Article("Author5", "Article5"));
+            articles.add(new Article("Author6", "Article6"));
+            articles.add(new Article("Author7", "Article7"));
 
             Field amount = AppController.class.getField("articleCount");
             amount.set(ctrl, articles.size());
             assertEquals(articles.size(), getter.invoke(ctrl), "'getArticleCount' is not working as it should! ");
         } catch (Exception e) {
             e.printStackTrace();
-            fail("Method 'getArticleCount' might be missing.");
+            fail("Method 'getArticleCount' might be missing." + System.lineSeparator() + "There might also be some other " +
+                    "problems.");
         }
     }
 
@@ -194,7 +200,8 @@ public class AppTest {
             assertEquals(articles.size(), getter.invoke(ctrl), "'getArticleCount' is not working as it should!");
         } catch (Exception e) {
             e.printStackTrace();
-            fail("Method 'getArticleCount' might be missing.");
+            fail("Method 'getArticleCount' might be missing." + System.lineSeparator() + "There might also be some other " +
+                    "problems.");
         }
     }
 
@@ -215,11 +222,11 @@ public class AppTest {
     public void getTopHeadlinesAustria2() {
         try {
             List<Article> articles = new LinkedList() {{
-                add(new Article("Author1", "Book1"));
-                add(new Article("Author2", "Book2"));
-                add(new Article("Author3", "Book3"));
-                add(new Article("Author4", "Book4"));
-                add(new Article("Author5", "Book5"));
+                add(new Article("Author1", "Article1"));
+                add(new Article("Author2", "Article2"));
+                add(new Article("Author3", "Article3"));
+                add(new Article("Author4", "Article4"));
+                add(new Article("Author5", "Article5"));
             }};
             Field amount = AppController.class.getField("articleCount");
             amount.set(ctrl, articles.size());
@@ -227,7 +234,8 @@ public class AppTest {
             assertEquals(articles.size(), m.invoke(ctrl), "'getTopHeadlinesAustria' is not working as it should!");
         } catch (Exception e) {
             e.printStackTrace();
-            fail("'getTopHeadlinesAustria' might be missing.");
+            fail("'getTopHeadlinesAustria' might be missing." + System.lineSeparator() + "There might also be some other " +
+                    "problems.");
         }
     }
 
@@ -248,9 +256,70 @@ public class AppTest {
     public void getAllNewsBitcoin2() {
         try {
             Method m = AppController.class.getMethod("getAllNewsBitcoin");
+            List<Article> articles = new LinkedList() {{
+                add(new Article("Author1", "Article1"));
+                add(new Article("Author2", "Article2"));
+                add(new Article("Author3", "Bitcoin1"));
+                add(new Article("Author4", "Bitcoin2"));
+                add(new Article("Author5", "MaybeBitcoin3"));
+                add(new Article("Author6", "BitterCoins4"));
+                add(new Article("Author7", "Euros5"));
+            }};
+
+            List<Article> articles2 = (List<Article>) m.invoke(null);
+            assertEquals(3, articles2.size(), "'getAllNewsBitcoin' is not working as it should!");
         } catch (Exception e) {
             e.printStackTrace();
-            fail("Method 'getAllNewsBitcoin' might be missing.");
+            fail("Method 'getAllNewsBitcoin' might be missing." + System.lineSeparator() + "There might also be some other " +
+                    "problems.");
+        }
+    }
+
+    @Test
+    @DisplayName("getAllNewsBitcoin - Test 3")
+    public void getAllNewsBitcoin3() {
+        try {
+            Method m = AppController.class.getMethod("getAllNewsBitcoin");
+            List<Article> articles = new LinkedList() {{
+                add(new Article("Author1", "Article1"));
+                add(new Article("Author2", "Article2"));
+                add(new Article("Author3", "Article3"));
+                add(new Article("Author4", "Article4"));
+                add(new Article("Author5", "Article5"));
+                add(new Article("Author6", "Article6"));
+                add(new Article("Author7", "Bit coin7"));
+            }};
+
+            List<Article> articles2 = (List<Article>) m.invoke(null);
+            assertEquals(0, articles2.size(), "'getAllNewsBitcoin' is not working as it should!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("Method 'getAllNewsBitcoin' might be missing." + System.lineSeparator() + "There might also be some other " +
+                    "problems.");
+        }
+    }
+
+    @Test
+    @DisplayName("getAllNewsBitcoin - Test 4")
+    public void getAllNewsBitcoin4() {
+        try {
+            Method m = AppController.class.getMethod("getAllNewsBitcoin");
+            List<Article> articles = new LinkedList() {{
+                add(new Article("Author1", "Article1"));
+                add(new Article("Author2", "Article2"));
+                add(new Article("Author3", "BiTCoin1"));
+                add(new Article("Author4", "BiTCoinsss2"));
+                add(new Article("Author5", "MaybeBiTCoin3"));
+                add(new Article("Author6", "BitterCoins4"));
+                add(new Article("Author7", "Euros5"));
+            }};
+
+            List<Article> articles2 = (List<Article>) m.invoke(null);
+            assertEquals(3, articles2.size(), "'getAllNewsBitcoin' is not working as it should!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("Method 'getAllNewsBitcoin' might be missing." + System.lineSeparator() + "There might also be some other " +
+                    "problems.");
         }
     }
 
@@ -271,6 +340,96 @@ public class AppTest {
     @Test
     @DisplayName("filterList - Test 2")
     public void filterList2() {
+        try {
+            Method m = AppController.class.getMethod("filterList", String.class, List.class);
+            List<Article> articles = new LinkedList() {{
+                add(new Article("Author1", "Article1"));
+                add(new Article("Author2", "Article2"));
+                add(new Article("Author3", "Magazine1"));
+                add(new Article("Author4", "Magazine2"));
+                add(new Article("Author5", "Magazine3"));
+                add(new Article("Author6", "Magazine4"));
+                add(new Article("Author7", "Magazine5"));
+            }};
 
+            List<Article> articles2 = (List<Article>) m.invoke(null, "Magazine", articles);
+            assertEquals(5, articles2.size(), "'filterList' is not working as it should!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("'filterList' might be missing." + System.lineSeparator() + "There might also be some other " +
+                    "problems.");
+        }
+    }
+
+    @Test
+    @DisplayName("filterList - Test 3")
+    public void filterList3() {
+        try {
+            Method m = AppController.class.getMethod("filterList", String.class, List.class);
+            List<Article> articles = new LinkedList() {{
+                add(new Article("Author1", "Article1"));
+                add(new Article("Author2", "Article2"));
+                add(new Article("Author3", "Magazine1"));
+                add(new Article("Author4", "Magazine2"));
+                add(new Article("Author5", "Magazine3"));
+                add(new Article("Author6", "Magazine4"));
+                add(new Article("Author7", "Magazine5"));
+            }};
+
+            List<Article> articles2 = (List<Article>) m.invoke(null, "SpiderMan", articles);
+            assertEquals(0, articles2.size(), "'filterList' is not working as it should!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("'filterList' might be missing." + System.lineSeparator() + "There might also be some other " +
+                    "problems.");
+        }
+    }
+
+    @Test
+    @DisplayName("filterList - Test 4")
+    public void filterList4() {
+        try {
+            Method m = AppController.class.getMethod("filterList", String.class, List.class);
+            List<Article> articles = new LinkedList() {{
+                add(new Article("Author1", "Article1"));
+                add(new Article("Author2", "Article2"));
+                add(new Article("Author3", "Magazine1"));
+                add(new Article("Author4", "Magazine2"));
+                add(new Article("Author5", "Magazine3"));
+                add(new Article("Author6", "Magazine4"));
+                add(new Article("Author7", "Magazine5"));
+            }};
+
+            List<Article> articles2 = (List<Article>) m.invoke(null, "2", articles);
+            assertEquals(2, articles2.size(), "'filterList' is not working as it should!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("'filterList' might be missing." + System.lineSeparator() + "There might also be some other " +
+                    "problems.");
+        }
+    }
+
+    @Test
+    @DisplayName("filterList - Test 5")
+    public void filterList5() {
+        try {
+            Method m = AppController.class.getMethod("filterList", String.class, List.class);
+            List<Article> articles = new LinkedList() {{
+                add(new Article("Author1", "Article1"));
+                add(new Article("Author2", "Article2"));
+                add(new Article("Author3", "Magazine1"));
+                add(new Article("Author4", "Magazine2"));
+                add(new Article("Author5", "Magazine3"));
+                add(new Article("Author6", "Magazine4"));
+                add(new Article("Author7", "Magazine5"));
+            }};
+
+            List<Article> articles2 = (List<Article>) m.invoke(null, "GAzINe", articles);
+            assertEquals(5, articles2.size(), "'filterList' is not working as it should!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("'filterList' might be missing." + System.lineSeparator() + "There might also be some other " +
+                    "problems.");
+        }
     }
 }
