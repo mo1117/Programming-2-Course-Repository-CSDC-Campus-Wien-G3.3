@@ -49,7 +49,8 @@ public class AppTest {
     public void setArticles2() {
         try {
             Method setter = AppController.class.getMethod("setArticles", List.class);
-            Field amount = AppController.class.getField("articleCount");
+            Field amount = AppController.class.getDeclaredField("articleCount");
+            amount.setAccessible(true);
             List<Article> articles = new LinkedList() {{
                 add(new Article("Author1", "Article1"));
             }};
@@ -68,7 +69,8 @@ public class AppTest {
     public void setArticles3() {
         try {
             Method setter = AppController.class.getMethod("setArticles", List.class);
-            Field amount = AppController.class.getField("articleCount");
+            Field amount = AppController.class.getDeclaredField("articleCount");
+            amount.setAccessible(true);
             List<Article> toBeDeleted = new LinkedList() {{
                 add(new Article("Author1", "Article1"));
                 add(new Article("Author2", "Article2"));
@@ -97,7 +99,8 @@ public class AppTest {
     public void setArticles4() {
         try {
             Method setter = AppController.class.getMethod("setArticles", List.class);
-            Field amount = AppController.class.getField("articleCount");
+            Field amount = AppController.class.getDeclaredField("articleCount");
+            amount.setAccessible(true);
             List<Article> articles = new LinkedList();
 
             setter.invoke(ctrl, articles);
@@ -130,7 +133,8 @@ public class AppTest {
                 add(new Article("Author1", "Book1"));
             }};
 
-            Field amount = AppController.class.getField("articleCount");
+            Field amount = AppController.class.getDeclaredField("articleCount");
+            amount.setAccessible(true);
             amount.set(ctrl, articles.size());
             assertEquals(articles.size(), getter.invoke(ctrl), "'getArticleCount' is not working as it should! ");
         } catch (Exception e) {
@@ -153,7 +157,8 @@ public class AppTest {
                 add(new Article("Author5", "Article5"));
             }};
 
-            Field amount = AppController.class.getField("articleCount");
+            Field amount = AppController.class.getDeclaredField("articleCount");
+            amount.setAccessible(true);
             amount.set(ctrl, articles.size());
             assertEquals(articles.size(), getter.invoke(ctrl), "'getArticleCount' is not working as it should! ");
         } catch (Exception e) {
@@ -178,7 +183,8 @@ public class AppTest {
             articles.add(new Article("Author6", "Article6"));
             articles.add(new Article("Author7", "Article7"));
 
-            Field amount = AppController.class.getField("articleCount");
+            Field amount = AppController.class.getDeclaredField("articleCount");
+            amount.setAccessible(true);
             amount.set(ctrl, articles.size());
             assertEquals(articles.size(), getter.invoke(ctrl), "'getArticleCount' is not working as it should! ");
         } catch (Exception e) {
@@ -194,7 +200,8 @@ public class AppTest {
         try {
             Method getter = AppController.class.getMethod("getArticleCount");
             List<Article> articles = new LinkedList();
-            Field amount = AppController.class.getField("articleCount");
+            Field amount = AppController.class.getDeclaredField("articleCount");
+            amount.setAccessible(true);
             amount.set(ctrl, articles.size());
 
             assertEquals(articles.size(), getter.invoke(ctrl), "'getArticleCount' is not working as it should!");
@@ -228,7 +235,8 @@ public class AppTest {
                 add(new Article("Author4", "Article4"));
                 add(new Article("Author5", "Article5"));
             }};
-            Field amount = AppController.class.getField("articleCount");
+            Field amount = AppController.class.getDeclaredField("articleCount");
+            amount.setAccessible(true);
             amount.set(ctrl, articles.size());
             Method m = AppController.class.getMethod("getTopHeadlinesAustria");
             assertEquals(articles.size(), m.invoke(ctrl), "'getTopHeadlinesAustria' is not working as it should!");
@@ -255,6 +263,7 @@ public class AppTest {
     @DisplayName("getAllNewsBitcoin - Test 2")
     public void getAllNewsBitcoin2() {
         try {
+            Method setter = AppController.class.getMethod("setArticles", List.class);
             Method m = AppController.class.getMethod("getAllNewsBitcoin");
             List<Article> articles = new LinkedList() {{
                 add(new Article("Author1", "Article1"));
@@ -266,7 +275,8 @@ public class AppTest {
                 add(new Article("Author7", "Euros5"));
             }};
 
-            List<Article> articles2 = (List<Article>) m.invoke(null);
+            setter.invoke(ctrl, articles);
+            List<Article> articles2 = (List<Article>) m.invoke(ctrl);
             assertEquals(3, articles2.size(), "'getAllNewsBitcoin' is not working as it should!");
         } catch (Exception e) {
             e.printStackTrace();
@@ -279,6 +289,7 @@ public class AppTest {
     @DisplayName("getAllNewsBitcoin - Test 3")
     public void getAllNewsBitcoin3() {
         try {
+            Method setter = AppController.class.getMethod("setArticles", List.class);
             Method m = AppController.class.getMethod("getAllNewsBitcoin");
             List<Article> articles = new LinkedList() {{
                 add(new Article("Author1", "Article1"));
@@ -290,7 +301,8 @@ public class AppTest {
                 add(new Article("Author7", "Bit coin7"));
             }};
 
-            List<Article> articles2 = (List<Article>) m.invoke(null);
+            setter.invoke(ctrl, articles);
+            List<Article> articles2 = (List<Article>) m.invoke(ctrl);
             assertEquals(0, articles2.size(), "'getAllNewsBitcoin' is not working as it should!");
         } catch (Exception e) {
             e.printStackTrace();
@@ -303,6 +315,7 @@ public class AppTest {
     @DisplayName("getAllNewsBitcoin - Test 4")
     public void getAllNewsBitcoin4() {
         try {
+            Method setter = AppController.class.getMethod("setArticles", List.class);
             Method m = AppController.class.getMethod("getAllNewsBitcoin");
             List<Article> articles = new LinkedList() {{
                 add(new Article("Author1", "Article1"));
@@ -314,7 +327,8 @@ public class AppTest {
                 add(new Article("Author7", "Euros5"));
             }};
 
-            List<Article> articles2 = (List<Article>) m.invoke(null);
+            setter.invoke(ctrl, articles);
+            List<Article> articles2 = (List<Article>) m.invoke(ctrl);
             assertEquals(3, articles2.size(), "'getAllNewsBitcoin' is not working as it should!");
         } catch (Exception e) {
             e.printStackTrace();
@@ -327,10 +341,11 @@ public class AppTest {
     @DisplayName("filterList - Test 1")
     public void filterList1() {
         try {
-            Method m = AppController.class.getMethod("filterList", String.class, List.class);
+            Method m = AppController.class.getDeclaredMethod("filterList", String.class, List.class);
             m.setAccessible(true);
             assertTrue(m.getReturnType() == List.class, "This method should return a List!");
             assertTrue(m.getModifiers() == Modifier.PROTECTED, "This method should be protected!");
+            assertTrue(m.getModifiers() == Modifier.STATIC, "This method should be static!");
         } catch (Exception e) {
             e.printStackTrace();
             fail("'filterList' might be missing. Also check parameters.");
@@ -341,7 +356,8 @@ public class AppTest {
     @DisplayName("filterList - Test 2")
     public void filterList2() {
         try {
-            Method m = AppController.class.getMethod("filterList", String.class, List.class);
+            Method m = AppController.class.getDeclaredMethod("filterList", String.class, List.class);
+            m.setAccessible(true);
             List<Article> articles = new LinkedList() {{
                 add(new Article("Author1", "Article1"));
                 add(new Article("Author2", "Article2"));
@@ -365,7 +381,8 @@ public class AppTest {
     @DisplayName("filterList - Test 3")
     public void filterList3() {
         try {
-            Method m = AppController.class.getMethod("filterList", String.class, List.class);
+            Method m = AppController.class.getDeclaredMethod("filterList", String.class, List.class);
+            m.setAccessible(true);
             List<Article> articles = new LinkedList() {{
                 add(new Article("Author1", "Article1"));
                 add(new Article("Author2", "Article2"));
@@ -389,7 +406,8 @@ public class AppTest {
     @DisplayName("filterList - Test 4")
     public void filterList4() {
         try {
-            Method m = AppController.class.getMethod("filterList", String.class, List.class);
+            Method m = AppController.class.getDeclaredMethod("filterList", String.class, List.class);
+            m.setAccessible(true);
             List<Article> articles = new LinkedList() {{
                 add(new Article("Author1", "Article1"));
                 add(new Article("Author2", "Article2"));
@@ -413,7 +431,8 @@ public class AppTest {
     @DisplayName("filterList - Test 5")
     public void filterList5() {
         try {
-            Method m = AppController.class.getMethod("filterList", String.class, List.class);
+            Method m = AppController.class.getDeclaredMethod("filterList", String.class, List.class);
+            m.setAccessible(true);
             List<Article> articles = new LinkedList() {{
                 add(new Article("Author1", "Article1"));
                 add(new Article("Author2", "Article2"));

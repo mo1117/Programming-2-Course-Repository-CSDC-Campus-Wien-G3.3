@@ -5,23 +5,24 @@ import java.util.stream.Collectors;
 
 public class AppController {
 
+    private int articleCount;
     private List<Article> articles;
 
-    void generateMockList(){
+    void generateMockList() {
 
     }
 
-    void setArticles(List<Article> articles){
-
+    public void setArticles(List<Article> articles) {
+        this.articles = articles;
+        this.articleCount = articles.size();
     }
 
-    public int getArticleCount(){
-        return articles.size();
-
+    public int getArticleCount() {
+        return this.articleCount;
     }
 
-    public List<Article> getTopHeadlinesAustria(){
-        return articles;
+    public List<Article> getTopHeadlinesAustria() {
+        return this.articles;
     }
 
     protected List<Article> filterList(String query, List<Article> articles) {
@@ -30,10 +31,7 @@ public class AppController {
                 .collect(Collectors.toList());
     }
 
-    public List<Article> getAllNewsBitcoin(){
-        return articles;
+    public List<Article> getAllNewsBitcoin() {
+        return filterList("bitcoin", this.articles);
     }
-
-
-
 }
