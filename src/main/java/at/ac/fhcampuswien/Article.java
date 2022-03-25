@@ -1,8 +1,8 @@
 package at.ac.fhcampuswien;
 
 public class Article {
+    private static String title;
     private String author;
-    private String title;
 
     public Article(String author, String title) {
         this.author = author;
@@ -13,7 +13,7 @@ public class Article {
         return author;
     }
 
-    public String getTitle(){
+    public static String getTitle(){
         return title;
     }
 

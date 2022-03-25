@@ -3,6 +3,7 @@ package at.ac.fhcampuswien;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 public class AppController {
 
     private int articleCount;
@@ -25,9 +26,9 @@ public class AppController {
         return this.articles;
     }
 
-    protected List<Article> filterList(String query, List<Article> articles) {
+    protected static List<Article> filterList(String query, List<Article> articles) {
         return articles.stream()
-                .filter(article -> article.getTitle().equals(query))
+                .filter(Article -> at.ac.fhcampuswien.Article.getTitle().contains(query))
                 .collect(Collectors.toList());
     }
 
