@@ -13,7 +13,7 @@ public class Article {
         return author;
     }
 
-    public String getTitle(String title){
+    public String getTitle(){
         return title;
     }
 
@@ -21,4 +21,6 @@ public class Article {
     public String toString(){
         return "Title: " + title + System.lineSeparator() + "Author: " + author;
     }
+
+
 }
