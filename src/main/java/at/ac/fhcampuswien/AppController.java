@@ -28,7 +28,7 @@ public class AppController {
 
     protected static List<Article> filterList(String query, List<Article> articles) {
         return articles.stream()
-                .filter(Article -> at.ac.fhcampuswien.Article.getTitle().contains(query))
+                .filter(article -> Article.getTitle().equalsIgnoreCase(query))
                 .collect(Collectors.toList());
     }
 
