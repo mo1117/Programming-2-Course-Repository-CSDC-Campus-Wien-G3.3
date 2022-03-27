@@ -33,7 +33,7 @@ public class AppTest {
     }
 
     @Test
-    @DisplayName("setArticles - Test 1")
+    @DisplayName("setArticles - Testing return type")
     public void setArticles1() {
         try {
             Method m = AppController.class.getMethod("setArticles", List.class);
@@ -45,7 +45,7 @@ public class AppTest {
     }
 
     @Test
-    @DisplayName("setArticles - Test 2")
+    @DisplayName("setArticles - Testing setter")
     public void setArticles2() {
         try {
             Method setter = AppController.class.getMethod("setArticles", List.class);
@@ -65,7 +65,7 @@ public class AppTest {
     }
 
     @Test
-    @DisplayName("setArticles - Test 3")
+    @DisplayName("setArticles - Testing if setter overwrites old value")
     public void setArticles3() {
         try {
             Method setter = AppController.class.getMethod("setArticles", List.class);
@@ -95,7 +95,7 @@ public class AppTest {
     }
 
     @Test
-    @DisplayName("setArticles - Test 4")
+    @DisplayName("setArticles - Testing if setter works with zero value")
     public void setArticles4() {
         try {
             Method setter = AppController.class.getMethod("setArticles", List.class);
@@ -113,7 +113,7 @@ public class AppTest {
     }
 
     @Test
-    @DisplayName("getArticleCount - Test 1")
+    @DisplayName("getArticleCount - Testing return type")
     public void getArticleCount1() {
         try {
             Method m = AppController.class.getMethod("getArticleCount");
@@ -125,7 +125,7 @@ public class AppTest {
     }
 
     @Test
-    @DisplayName("getArticleCount - Test 2")
+    @DisplayName("getArticleCount - Testing getter")
     public void getArticleCount2() {
         try {
             Method getter = AppController.class.getMethod("getArticleCount");
@@ -145,7 +145,7 @@ public class AppTest {
     }
 
     @Test
-    @DisplayName("getArticleCount - Test 3")
+    @DisplayName("getArticleCount - Testing getter")
     public void getArticleCount3() {
         try {
             Method getter = AppController.class.getMethod("getArticleCount");
@@ -169,7 +169,7 @@ public class AppTest {
     }
 
     @Test
-    @DisplayName("getArticleCount - Test 4")
+    @DisplayName("getArticleCount - Testing getter")
     public void getArticleCount4() {
         try {
             Method getter = AppController.class.getMethod("getArticleCount");
@@ -195,7 +195,7 @@ public class AppTest {
     }
 
     @Test
-    @DisplayName("getArticleCount - Test 5")
+    @DisplayName("getArticleCount - Testing getter with zero amount")
     public void getArticleCount5() {
         try {
             Method getter = AppController.class.getMethod("getArticleCount");
@@ -249,7 +249,7 @@ public class AppTest {
     }
 
     @Test
-    @DisplayName("getAllNewsBitcoin - Test 1")
+    @DisplayName("getAllNewsBitcoin - Testing return type")
     public void getAllNewsBitcoin1() {
         try {
             Method m = AppController.class.getMethod("getAllNewsBitcoin");
@@ -261,7 +261,7 @@ public class AppTest {
     }
 
     @Test
-    @DisplayName("getAllNewsBitcoin - Test 2")
+    @DisplayName("getAllNewsBitcoin - Testing method")
     public void getAllNewsBitcoin2() {
         try {
             Method setter = AppController.class.getMethod("setArticles", List.class);
@@ -287,7 +287,7 @@ public class AppTest {
     }
 
     @Test
-    @DisplayName("getAllNewsBitcoin - Test 3")
+    @DisplayName("getAllNewsBitcoin - Testing method")
     public void getAllNewsBitcoin3() {
         try {
             Method setter = AppController.class.getMethod("setArticles", List.class);
@@ -313,7 +313,7 @@ public class AppTest {
     }
 
     @Test
-    @DisplayName("getAllNewsBitcoin - Test 4")
+    @DisplayName("getAllNewsBitcoin - Testing method - lowercase shouldn't bother us")
     public void getAllNewsBitcoin4() {
         try {
             Method setter = AppController.class.getMethod("setArticles", List.class);
@@ -339,7 +339,7 @@ public class AppTest {
     }
 
     @Test
-    @DisplayName("filterList - Test 1")
+    @DisplayName("filterList - Testing return types and modifiers")
     public void filterList1() {
         try {
             Method m = AppController.class.getDeclaredMethod("filterList", String.class, List.class);
@@ -355,7 +355,7 @@ public class AppTest {
     }
 
     @Test
-    @DisplayName("filterList - Test 2")
+    @DisplayName("filterList - Testing method")
     public void filterList2() {
         try {
             Method m = AppController.class.getDeclaredMethod("filterList", String.class, List.class);
@@ -380,7 +380,7 @@ public class AppTest {
     }
 
     @Test
-    @DisplayName("filterList - Test 3")
+    @DisplayName("filterList - Testing method")
     public void filterList3() {
         try {
             Method m = AppController.class.getDeclaredMethod("filterList", String.class, List.class);

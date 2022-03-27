@@ -16,24 +16,25 @@ public class Menu {
     }
 
     public void start() {
-        printMenu();
-
         Scanner scanner = new Scanner(System.in);
-        String input = scanner.next();
+        String input = new String();
 
-        while (!input.equals(end)) {
+        while (true) {
+            printMenu();
+            input = scanner.next();
             handleInput(input);
+            if (input.equals(end))
+                break;
         }
-
     }
 
     private void handleInput(String input) {
         if (input.equals("a")) {
-            controller.getTopHeadlinesAustria();
+            getTopHeadlinesAustria(controller);
         } else if (input.equals("b")) {
-            controller.getAllNewsBitcoin();
+            getAllNewsBitcoin(controller);
         } else if (input.equals("y")) {
-            controller.getArticleCount();
+            getArticleCount(controller);
         } else if (input.equals("q")) {
             printExitMessage();
         } else {
@@ -42,12 +43,15 @@ public class Menu {
     }
 
     private void getArticleCount(AppController ctrl) {
+        System.out.println(ctrl.getArticleCount());
     }
 
     private void getTopHeadlinesAustria(AppController ctrl) {
+        System.out.println(ctrl.getTopHeadlinesAustria());
     }
 
     private void getAllNewsBitcoin(AppController ctrl) {
+        System.out.println(ctrl.getAllNewsBitcoin());
     }
 
     private static void printExitMessage() {

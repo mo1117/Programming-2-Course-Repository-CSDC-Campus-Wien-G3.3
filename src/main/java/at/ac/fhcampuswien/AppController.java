@@ -27,10 +27,11 @@ public class AppController {
 
     protected static List<Article> filterList(String query, List<Article> articles) {
         List<Article> articlesNew = new LinkedList();
-        for (Article x : articles) {
-            if (x.getTitle().toLowerCase().contains(query.toLowerCase()))
-                articlesNew.add(x);
-        }
+        if (articles != null)
+            for (Article x : articles) {
+                if (x.getTitle().toLowerCase().contains(query.toLowerCase()))
+                    articlesNew.add(x);
+            }
         return articlesNew;
     }
 
