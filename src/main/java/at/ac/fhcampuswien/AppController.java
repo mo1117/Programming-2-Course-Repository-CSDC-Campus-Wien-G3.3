@@ -1,15 +1,14 @@
 package at.ac.fhcampuswien;
 
+import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
-
 
 public class AppController {
 
     private int articleCount;
     private List<Article> articles;
 
-    void generateMockList() {
+    public void generateMockList() {
 
     }
 
@@ -27,9 +26,12 @@ public class AppController {
     }
 
     protected static List<Article> filterList(String query, List<Article> articles) {
-        return articles.stream()
-                .filter(article -> Article.getTitle().equalsIgnoreCase(query))
-                .collect(Collectors.toList());
+        List<Article> articlesNew = new LinkedList();
+        for (Article x : articles) {
+            if (x.getTitle().toLowerCase().contains(query.toLowerCase()))
+                articlesNew.add(x);
+        }
+        return articlesNew;
     }
 
     public List<Article> getAllNewsBitcoin() {

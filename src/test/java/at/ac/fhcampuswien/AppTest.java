@@ -235,11 +235,12 @@ public class AppTest {
                 add(new Article("Author4", "Article4"));
                 add(new Article("Author5", "Article5"));
             }};
-            Field amount = AppController.class.getDeclaredField("articleCount");
-            amount.setAccessible(true);
-            amount.set(ctrl, articles.size());
+            Method setter = AppController.class.getMethod("setArticles", List.class);
+            setter.invoke(ctrl, articles);
+
             Method m = AppController.class.getMethod("getTopHeadlinesAustria");
-            assertEquals(articles.size(), m.invoke(ctrl), "'getTopHeadlinesAustria' is not working as it should!");
+            List<Article> articles2 = (List<Article>) m.invoke(ctrl);
+            assertEquals(articles.size(), articles2.size(), "'getTopHeadlinesAustria' is not working as it should!");
         } catch (Exception e) {
             e.printStackTrace();
             fail("'getTopHeadlinesAustria' might be missing." + System.lineSeparator() + "There might also be some other " +
@@ -344,8 +345,9 @@ public class AppTest {
             Method m = AppController.class.getDeclaredMethod("filterList", String.class, List.class);
             m.setAccessible(true);
             assertTrue(m.getReturnType() == List.class, "This method should return a List!");
-            assertTrue(m.getModifiers() == Modifier.PROTECTED, "This method should be protected!");
-            assertTrue(m.getModifiers() == Modifier.STATIC, "This method should be static!");
+            assertTrue(m.getModifiers() == Modifier.PROTECTED + Modifier.STATIC, "This method should be static" +
+                    " and protected!");
+
         } catch (Exception e) {
             e.printStackTrace();
             fail("'filterList' might be missing. Also check parameters.");
