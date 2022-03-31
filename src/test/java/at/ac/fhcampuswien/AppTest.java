@@ -339,7 +339,7 @@ public class AppTest {
     }
 
     @Test
-    @DisplayName("filterList - Testing return types and modifiers")
+    @DisplayName("filterList - Testing return types")
     public void filterList1() {
         try {
             Method m = AppController.class.getDeclaredMethod("filterList", String.class, List.class);
@@ -355,8 +355,23 @@ public class AppTest {
     }
 
     @Test
-    @DisplayName("filterList - Testing method")
+    @DisplayName("filterList - Testing modifiers")
     public void filterList2() {
+        try {
+            Method m = AppController.class.getDeclaredMethod("filterList", String.class, List.class);
+            m.setAccessible(true);
+            assertTrue(m.getModifiers() == Modifier.PROTECTED + Modifier.STATIC, "This method should be static" +
+                    " and protected!");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("'filterList' might be missing. Also check parameters.");
+        }
+    }
+
+    @Test
+    @DisplayName("filterList - Testing method")
+    public void filterList3() {
         try {
             Method m = AppController.class.getDeclaredMethod("filterList", String.class, List.class);
             m.setAccessible(true);
@@ -381,7 +396,7 @@ public class AppTest {
 
     @Test
     @DisplayName("filterList - Testing method")
-    public void filterList3() {
+    public void filterList4() {
         try {
             Method m = AppController.class.getDeclaredMethod("filterList", String.class, List.class);
             m.setAccessible(true);
@@ -406,7 +421,7 @@ public class AppTest {
 
     @Test
     @DisplayName("filterList - Test 4")
-    public void filterList4() {
+    public void filterList5() {
         try {
             Method m = AppController.class.getDeclaredMethod("filterList", String.class, List.class);
             m.setAccessible(true);
@@ -431,7 +446,7 @@ public class AppTest {
 
     @Test
     @DisplayName("filterList - Test 5")
-    public void filterList5() {
+    public void filterList6() {
         try {
             Method m = AppController.class.getDeclaredMethod("filterList", String.class, List.class);
             m.setAccessible(true);

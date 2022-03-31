@@ -1,24 +1,26 @@
 package at.ac.fhcampuswien;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
+import java.net.URL;
 
 public class App extends Application {
     public static void main(String[] args) {
-        Menu menu = new Menu();
-        menu.start();
-        launch(args);
+        // Menu menu = new Menu();
+        // menu.start();
+        launch();
     }
 
     @Override
-    public void start(Stage primaryStage){
-        primaryStage.setTitle("NewsApp");
-        StackPane layout = new StackPane();
-
-        Scene scene = new Scene(layout, 300, 300);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+    public void start(Stage stage) throws Exception {
+        stage.setTitle("NewsApp");
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("gui.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
     }
 }

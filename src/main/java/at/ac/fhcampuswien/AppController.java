@@ -8,6 +8,11 @@ public class AppController {
     private int articleCount;
     private List<Article> articles;
 
+    public AppController(){
+        this.articleCount = 0;
+        this.articles = null;
+    }
+
     public void generateMockList() {
 
     }
