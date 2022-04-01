@@ -25,9 +25,9 @@ public class GUIController {
 
     List<Article> articles = new LinkedList(){{
         add(new Article("Author1", "Article1"));
-        add(new Article("Author1", "Bitcoin1"));
-        add(new Article("Author1", "Article2"));
-        add(new Article("Author1", "Bitcoin2"));
+        add(new Article("Author2", "Bitcoin1"));
+        add(new Article("Author3", "Article2"));
+        add(new Article("Author4", "Bitcoin2"));
     }};
 
     {
