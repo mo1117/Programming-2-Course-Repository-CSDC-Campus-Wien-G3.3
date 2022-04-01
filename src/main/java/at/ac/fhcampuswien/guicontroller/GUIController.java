@@ -57,6 +57,16 @@ public class GUIController {
 
     @FXML
     public void buttonHeadlinesClicked() {
+        vbox.setVisible(false);
+        vbox.getChildren().clear();
+        vbox.setAlignment(Pos.TOP_CENTER);
+        label.setFont(font);
+        StringBuilder text = new StringBuilder();
+        for(Article x : ctrl.getTopHeadlinesAustria())
+            text.append(x.toString());
+        label.setText(text.toString());
+        vbox.getChildren().add(label);
+        vbox.setVisible(true);
     }
 
     @FXML
@@ -86,5 +96,6 @@ public class GUIController {
 
     @FXML
     public void buttonQuitClicked() {
+
     }
 }
