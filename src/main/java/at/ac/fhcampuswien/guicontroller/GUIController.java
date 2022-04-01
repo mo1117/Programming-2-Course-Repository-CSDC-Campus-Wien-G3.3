@@ -25,17 +25,23 @@ public class GUIController {
 
     List<Article> articles = new LinkedList(){{
         add(new Article("Author1", "Article1"));
+        add(new Article("Author1", "Bitcoin1"));
+        add(new Article("Author1", "Article2"));
+        add(new Article("Author1", "Bitcoin2"));
     }};
 
     {
         ctrl.setArticles(articles);
     }
 
-    private Label label = new Label("Hallo");
-    private Font font = new Font("Serif", 15);
+    private Label label = new Label();
+    private Font font = new Font("Serif", 20);
 
     @FXML
     private VBox vbox = new VBox();
+
+    @FXML
+    private AnchorPane anchorPane = new AnchorPane();
 
     @FXML
     private Button buttonHeadlines;
@@ -55,13 +61,24 @@ public class GUIController {
 
     @FXML
     public void buttonBitcoinClicked() {
+        vbox.setVisible(false);
+        vbox.getChildren().clear();
+        vbox.setAlignment(Pos.TOP_CENTER);
+        label.setFont(font);
+        StringBuilder text = new StringBuilder();
+        for(Article x : ctrl.getAllNewsBitcoin())
+            text.append(x.toString());
+        label.setText(text.toString());
 
+        vbox.getChildren().add(label);
+        vbox.setVisible(true);
     }
 
     @FXML
     public void buttonCountClicked() {
         vbox.getChildren().clear();
         label.setFont(font);
+        label.setText("There are currently " + (ctrl.getArticleCount()) + " Article(s) available!");
         vbox.setAlignment(Pos.TOP_CENTER);
         vbox.getChildren().add(label);
         vbox.setVisible(true);

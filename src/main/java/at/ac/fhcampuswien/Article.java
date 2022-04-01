@@ -19,7 +19,7 @@ public class Article {
 
     @Override
     public String toString() {
-        return "Title: " + title + System.lineSeparator() + "Author: " + author;
+        return "Title: " + title + System.lineSeparator() + "Author: " + author + System.lineSeparator();
     }
 
 
