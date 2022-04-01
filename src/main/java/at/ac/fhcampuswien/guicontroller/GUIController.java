@@ -1,20 +1,16 @@
 package at.ac.fhcampuswien.guicontroller;
 
-import at.ac.fhcampuswien.App;
 import at.ac.fhcampuswien.AppController;
 import at.ac.fhcampuswien.Article;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.stage.Window;
+
 
 import java.util.LinkedList;
 import java.util.List;
@@ -25,9 +21,9 @@ public class GUIController {
 
     List<Article> articles = new LinkedList(){{
         add(new Article("Author1", "Article1"));
-        add(new Article("Author2", "Bitcoin1"));
-        add(new Article("Author3", "Article2"));
-        add(new Article("Author4", "Bitcoin2"));
+        add(new Article("Author1", "Bitcoin1"));
+        add(new Article("Author1", "Article2"));
+        add(new Article("Author1", "Bitcoin2"));
     }};
 
     {
@@ -36,6 +32,7 @@ public class GUIController {
 
     private Label label = new Label();
     private Font font = new Font("Serif", 20);
+    private Stage stage;
 
     @FXML
     private VBox vbox = new VBox();
@@ -96,6 +93,7 @@ public class GUIController {
 
     @FXML
     public void buttonQuitClicked() {
-
+        stage = (Stage) buttonQuit.getScene().getWindow();
+        stage.close();
     }
 }
