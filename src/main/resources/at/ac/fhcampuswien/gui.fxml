@@ -10,26 +10,33 @@
         <Button fx:id="buttonHeadlines" layoutX="28.0" layoutY="528.0" minHeight="30.0" minWidth="150.0" mnemonicParsing="false" onAction="#buttonHeadlinesClicked" text="Top Headlines of Austria">
             <padding>
                 <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-            </padding></Button>
+            </padding>
+        </Button>
         <Button fx:id="buttonBitcoin" layoutX="284.0" layoutY="528.0" minHeight="30.0" minWidth="150.0" mnemonicParsing="false" onAction="#buttonBitcoinClicked" text="News about Bitcoins">
             <padding>
                 <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-            </padding></Button>
+            </padding>
+        </Button>
         <Button fx:id="buttonCount" layoutX="581.0" layoutY="528.0" minHeight="30.0" minWidth="150.0" mnemonicParsing="false" onAction="#buttonCountClicked" text="Count of Articles">
             <padding>
                 <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-            </padding></Button>
+            </padding>
+        </Button>
         <Button fx:id="buttonQuit" layoutX="842.0" layoutY="528.0" minHeight="30.0" minWidth="150.0" mnemonicParsing="false" onAction="#buttonQuitClicked" text="Quit">
             <padding>
                 <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-            </padding></Button>
-      <VBox fx:id="vbox" alignment="TOP_CENTER" layoutX="128.0" layoutY="72.0" prefHeight="431.0" prefWidth="767.0">
-         <children>
-            <Label fx:id="label" alignment="TOP_CENTER" prefHeight="510.0" prefWidth="543.0">
-               <font>
-                  <Font name="Bell MT" size="20.0" />
-               </font></Label>
-         </children>
-      </VBox>
+            </padding>
+        </Button>
+        <VBox fx:id="vbox" alignment="TOP_CENTER" layoutX="128.0" layoutY="72.0" prefHeight="431.0" prefWidth="767.0">
+            <children>
+                <Label fx:id="label" alignment="TOP_CENTER" prefHeight="432.0" prefWidth="974.0">
+                    <font>
+                        <Font name="Bell MT" size="20.0" />
+                    </font>
+                </Label>
+            </children>
+        </VBox>
+      <Button fx:id="buttonRight" layoutX="911.0" layoutY="275.0" mnemonicParsing="false" onAction="#buttonRightClicked" text="Next" visible="false" />
+      <Button fx:id="buttonLeft" layoutX="28.0" layoutY="288.0" mnemonicParsing="false" onAction="#buttonLeftClicked" text="Previous" visible="false" />
     </children>
 </AnchorPane>
