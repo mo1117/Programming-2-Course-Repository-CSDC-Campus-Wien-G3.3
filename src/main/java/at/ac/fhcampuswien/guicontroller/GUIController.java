@@ -26,7 +26,7 @@ public class GUIController {
         add(new Article("Author1", "Bitcoin2"));
         add(new Article("Author1", "Bitcoin2"));
         add(new Article("Author1", "Bitcoin2"));
-        add(new Article("Author1", "Bitcoin2"));
+        add(new Article("Author1", "Spiderman2"));
         add(new Article("Author1", "Bitcoin2"));
         add(new Article("Author1", "Bitcoin2"));
         add(new Article("Author1", "Bitcoin2"));

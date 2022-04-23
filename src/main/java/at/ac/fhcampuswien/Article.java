@@ -3,10 +3,12 @@ package at.ac.fhcampuswien;
 public class Article {
     private String title;
     private String author;
+    private String description;
 
-    public Article(String author, String title) {
+    public Article(String author, String title, String description) {
         this.author = author;
         this.title = title;
+        this.description = description;
     }
 
     public String getAuthor() {
@@ -19,7 +21,7 @@ public class Article {
 
     @Override
     public String toString() {
-        return "Title: " + title + System.lineSeparator() + "Author: " + author + System.lineSeparator();
+        return "Title: " + this.title + System.lineSeparator() + "Author: " + this.author + System.lineSeparator();
     }
 
 
