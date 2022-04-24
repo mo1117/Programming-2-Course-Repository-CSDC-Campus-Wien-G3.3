@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Some Tests for the AppController Class
  * Author @Moritz Lindner
  */
-
+/*
 public class AppTest {
 
     private AppController ctrl = new AppController();
@@ -469,3 +469,4 @@ public class AppTest {
         }
     }
 }
+*/

@@ -30,6 +30,8 @@ public class AppController {
         return this.articles;
     }
 
+
+
     protected static List<Article> filterList(String query, List<Article> articles) {
         List<Article> articlesNew = new LinkedList();
         if (articles != null)
