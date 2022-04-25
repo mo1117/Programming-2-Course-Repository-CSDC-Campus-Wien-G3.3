@@ -11,7 +11,7 @@ public class Article {
         this.description = description;
     }
 
-    public Article(String author, String title){
+    public Article(String author, String title) {
         this.author = author;
         this.title = title;
     }

@@ -1,5 +1,6 @@
 package at.ac.fhcampuswien;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -7,6 +8,8 @@ public class AppController {
 
     private int articleCount;
     private List<Article> articles;
+    private NewsResponse newsResponse;
+    private NewsApi newsApi = new NewsApi();
 
     public AppController(){
         this.articleCount = 0;
@@ -26,7 +29,9 @@ public class AppController {
         return this.articleCount;
     }
 
-    public List<Article> getTopHeadlinesAustria() {
+    public List<Article> getTopHeadlinesAustria() throws IOException {
+        this.newsResponse = this.newsApi.request();
+        this.setArticles(newsResponse.getArticles());
         return this.articles;
     }
 

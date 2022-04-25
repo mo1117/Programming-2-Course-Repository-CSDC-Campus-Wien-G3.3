@@ -1,8 +1,9 @@
 package at.ac.fhcampuswien;
 
+import java.io.IOException;
 import java.util.Scanner;
 
-public class Menu {
+public class Menu{
 
     private AppController controller = new AppController();
 
@@ -15,7 +16,7 @@ public class Menu {
     public Menu() {
     }
 
-    public void start() {
+    public void start() throws IOException {
         Scanner scanner = new Scanner(System.in);
         String input = new String();
 
@@ -28,7 +29,7 @@ public class Menu {
         }
     }
 
-    private void handleInput(String input) {
+    private void handleInput(String input) throws IOException{
         if (input.equals("a")) {
             getTopHeadlinesAustria(controller);
         } else if (input.equals("b")) {
@@ -46,7 +47,7 @@ public class Menu {
         System.out.println(ctrl.getArticleCount());
     }
 
-    private void getTopHeadlinesAustria(AppController ctrl) {
+    private void getTopHeadlinesAustria(AppController ctrl) throws IOException {
         System.out.println(ctrl.getTopHeadlinesAustria());
     }
 

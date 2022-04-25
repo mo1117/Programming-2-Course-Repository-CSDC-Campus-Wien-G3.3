@@ -7,21 +7,29 @@ public class NewsResponse {
     private int totalResults;
     private List<Article> articles;
 
-    public NewsResponse(String status, int totalResults, List<Article> articles){
+    public NewsResponse(String status, int totalResults, List<Article> articles) {
         this.status = status;
         this.totalResults = totalResults;
         this.articles = articles;
     }
 
-    public String getStatus(){
+    public String getStatus() {
         return this.status;
     }
 
-    public int getTotalResults(){
+    public int getTotalResults() {
         return this.totalResults;
     }
 
-    public List<Article> getArticles(){
+    public List<Article> getArticles() {
         return this.articles;
+    }
+
+    @Override
+    public String toString() {
+        String output = this.status + System.lineSeparator() + this.totalResults + System.lineSeparator();
+        for (Article x : this.articles)
+            output += x.toString();
+        return output;
     }
 }

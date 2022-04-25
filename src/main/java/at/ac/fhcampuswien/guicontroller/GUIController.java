@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -73,7 +74,7 @@ public class GUIController {
     }
 
     @FXML
-    public void buttonHeadlinesClicked() {
+    public void buttonHeadlinesClicked() throws IOException {
         count = 0;
         buttonLeft.setVisible(false);
         vbox.getChildren().clear();
@@ -117,7 +118,7 @@ public class GUIController {
     }
 
     @FXML
-    public void buttonLeftClicked() {
+    public void buttonLeftClicked() throws IOException{
         buttonLeft.setVisible(false);
         buttonRight.setVisible(true);
         StringBuilder text = new StringBuilder();
@@ -148,7 +149,7 @@ public class GUIController {
     }
 
     @FXML
-    public void buttonRightClicked() {
+    public void buttonRightClicked() throws IOException{
         vbox.getChildren().clear();
         vbox.setVisible(false);
         buttonRight.setVisible(false);
