@@ -24,12 +24,4 @@ public class NewsResponse {
     public List<Article> getArticles() {
         return this.articles;
     }
-
-    @Override
-    public String toString() {
-        String output = this.status + System.lineSeparator() + this.totalResults + System.lineSeparator();
-        for (Article x : this.articles)
-            output += x.toString();
-        return output;
-    }
 }

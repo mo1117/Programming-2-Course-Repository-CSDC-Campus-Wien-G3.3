@@ -7,17 +7,21 @@
 
 <AnchorPane fx:id="anchorPane" prefHeight="576" prefWidth="1024" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.ac.fhcampuswien.guicontroller.GUIController">
     <children>
-        <Button fx:id="buttonHeadlines" layoutX="28.0" layoutY="528.0" minHeight="30.0" minWidth="150.0" mnemonicParsing="false" onAction="#buttonHeadlinesClicked" text="Top Headlines of Austria">
+      <Button fx:id="customNews" layoutX="436.0" layoutY="529.0" minHeight="30.0" minWidth="150.0" mnemonicParsing="false" onAction="#buttonCustomNewsClicked" text="Custom News Austria">
+         <padding>
+            <Insets bottom="8.0" right="8.0" top="8.0" />
+         </padding></Button>
+        <Button fx:id="buttonHeadlines" layoutX="13.0" layoutY="528.0" minHeight="30.0" minWidth="150.0" mnemonicParsing="false" onAction="#buttonHeadlinesAustriaClicked" text="Headlines of Austria">
             <padding>
                 <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
             </padding>
         </Button>
-        <Button fx:id="buttonBitcoin" layoutX="284.0" layoutY="528.0" minHeight="30.0" minWidth="150.0" mnemonicParsing="false" onAction="#buttonBitcoinClicked" text="News about Bitcoins">
+        <Button fx:id="buttonBitcoin" layoutX="230.0" layoutY="528.0" minHeight="30.0" minWidth="150.0" mnemonicParsing="false" onAction="#buttonBitcoinClicked" text="Bitcoin News">
             <padding>
                 <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
             </padding>
         </Button>
-        <Button fx:id="buttonCount" layoutX="581.0" layoutY="528.0" minHeight="30.0" minWidth="150.0" mnemonicParsing="false" onAction="#buttonCountClicked" text="Count of Articles">
+        <Button fx:id="buttonCount" layoutX="641.0" layoutY="527.0" minHeight="30.0" minWidth="150.0" mnemonicParsing="false" onAction="#buttonCountClicked" text="Count of Articles">
             <padding>
                 <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
             </padding>
@@ -27,7 +31,7 @@
                 <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
             </padding>
         </Button>
-        <VBox fx:id="vbox" alignment="TOP_CENTER" layoutX="128.0" layoutY="72.0" prefHeight="431.0" prefWidth="767.0">
+        <VBox fx:id="vbox" alignment="TOP_CENTER" layoutX="128.0" layoutY="72.0" prefHeight="431.0" prefWidth="767.0" visible="false">
             <children>
                 <Label fx:id="label" alignment="TOP_CENTER" prefHeight="432.0" prefWidth="974.0">
                     <font>

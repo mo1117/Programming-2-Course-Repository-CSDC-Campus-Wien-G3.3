@@ -19,14 +19,13 @@ public class NewsApi {
     private OkHttpClient client = new OkHttpClient();
     private Gson gson = new Gson();
     private static final String API_key = "2f62c3bf2ba84f97adb6eaf246dccced";
-    public static final String URL = "https://newsapi.org/v2/";
-    public static CountryEnum countryEnum = CountryEnum.at;
-    public static CategoryEnum categoryEnum;
-    public static LanguageEnum languageEnum;
-    public static EndpointEnum endpointEnum = EndpointEnum.everything;
-    public static SortByEnum sortByEnum;
-    public static String query = "bitcoin";
-
+    private static final String URL = "https://newsapi.org/v2/";
+    public static CountryEnum countryEnum = null;
+    public static CategoryEnum categoryEnum = null;
+    public static LanguageEnum languageEnum = null;
+    public static EndpointEnum endpointEnum = null;
+    public static SortByEnum sortByEnum = null;
+    public static String query = null;
 
     public NewsResponse request() throws IOException {
         HttpUrl.Builder newURL = Objects.requireNonNull(HttpUrl.parse(URL)).newBuilder();

@@ -51,7 +51,7 @@ public class Menu{
         System.out.println(ctrl.getTopHeadlinesAustria());
     }
 
-    private void getAllNewsBitcoin(AppController ctrl) {
+    private void getAllNewsBitcoin(AppController ctrl) throws IOException {
         System.out.println(ctrl.getAllNewsBitcoin());
     }
 
