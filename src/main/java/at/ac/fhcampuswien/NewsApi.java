@@ -31,7 +31,6 @@ public class NewsApi {
     public NewsResponse request() throws IOException {
         HttpUrl.Builder newURL = Objects.requireNonNull(HttpUrl.parse(URL)).newBuilder();
         newURL.addPathSegment(endpointEnum.getEndpoint());
-        newURL.addQueryParameter("q", query);
 
         if (query != null) {
             newURL.addQueryParameter("q", query);
