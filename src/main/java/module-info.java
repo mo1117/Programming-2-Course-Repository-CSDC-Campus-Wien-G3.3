@@ -8,4 +8,6 @@ module NewsApp {
     exports at.ac.fhcampuswien;
     exports at.ac.fhcampuswien.guicontroller;
     opens at.ac.fhcampuswien.guicontroller to javafx.fxml;
+    exports at.ac.fhcampuswien.enums;
+    opens at.ac.fhcampuswien.enums to com.google.gson, javafx.fxml;
 }
