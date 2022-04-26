@@ -42,6 +42,14 @@ public class NewsApi {
             newURL.addQueryParameter("country", countryEnum.toString());
         }
 
+        if (categoryEnum != null) {
+            newURL.addQueryParameter("category", categoryEnum.toString());
+        }
+
+        if (languageEnum != null) {
+            newURL.addQueryParameter("language", languageEnum.toString());
+        }
+
         newURL.addQueryParameter("apiKey", API_key);
         System.out.println(newURL.build());
 
