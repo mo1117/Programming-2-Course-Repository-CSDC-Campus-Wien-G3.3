@@ -33,6 +33,9 @@ public class NewsApi {
         newURL.addPathSegment(endpointEnum.getEndpoint());
         newURL.addQueryParameter("q", query);
 
+        if (query != null) {
+            newURL.addQueryParameter("q", query);
+        }
 
         if (sortByEnum != null) {
             newURL.addQueryParameter("sortBy", sortByEnum.toString());
