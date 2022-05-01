@@ -32,12 +32,17 @@ public class GUIController {
     private Button buttonLeft = new Button();
 
     @FXML
+    private Button seeArticle = new Button();
+
+    @FXML
     public void buttonHeadlinesAustriaClicked() throws IOException {
         vbox.setVisible(true);
+        seeArticle.setVisible(true);
         //Left Button is invisible if we are on page 1 - topHeadlines = true because we are looking at the topHeadlines
+        //if we changed from bitcoinNews to topHeadlines - set count to 0
 
-        if(this.bitcoin)
-            count=0;
+        if (this.bitcoin)
+            count = 0;
 
         if (count == 0)
             buttonLeft.setVisible(false);
@@ -66,12 +71,14 @@ public class GUIController {
     @FXML
     public void buttonBitcoinClicked() throws IOException {
         vbox.setVisible(true);
+        seeArticle.setVisible(true);
         //Left Button is invisible if we are on page 1 - bitcoin = true because we are looking at the bitcoin news
+        //If we changed from topHeadlines to bitcoinNews - set count to 0
 
-        if(this.topHeadlines)
-            count=0;
+        if (this.topHeadlines)
+            count = 0;
 
-        if (count == 0 ||false)
+        if (count == 0)
             buttonLeft.setVisible(false);
         else
             buttonLeft.setVisible(true);
@@ -96,11 +103,6 @@ public class GUIController {
     }
 
     @FXML
-    public void buttonCustomNewsClicked() {
-
-    }
-
-    @FXML
     public void buttonLeftClicked() throws IOException {
         this.count--;
         if (this.topHeadlines)
@@ -120,12 +122,23 @@ public class GUIController {
 
     @FXML
     public void buttonCountClicked() {
+        seeArticle.setVisible(false);
         buttonRight.setVisible(false);
         buttonLeft.setVisible(false);
         vbox.getChildren().clear();
         label.setText("There are currently " + (ctrl.getArticleCount()) + " Article(s) available!");
         vbox.getChildren().add(label);
         vbox.setVisible(true);
+    }
+
+    @FXML
+    public void seeArticleClicked() throws IOException{
+        String url = new String();
+        if (this.topHeadlines)
+            url = ctrl.getTopHeadlinesAustria().get(this.count).getUrl();
+        else
+            url = ctrl.getAllNewsBitcoin().get(this.count).getUrl();
+        java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
     }
 
     @FXML

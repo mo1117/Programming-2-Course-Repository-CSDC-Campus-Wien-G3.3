@@ -18,8 +18,8 @@ public class NewsApi {
 
     private OkHttpClient client = new OkHttpClient();
     private Gson gson = new Gson();
-    private static final String API_key = "2f62c3bf2ba84f97adb6eaf246dccced";
-    private static final String URL = "https://newsapi.org/v2/";
+    private final String API_key = "2f62c3bf2ba84f97adb6eaf246dccced";
+    private final String URL = "https://newsapi.org/v2/";
     public static CountryEnum countryEnum = null;
     public static CategoryEnum categoryEnum = null;
     public static LanguageEnum languageEnum = null;
@@ -52,7 +52,7 @@ public class NewsApi {
         }
 
         newURL.addQueryParameter("apiKey", API_key);
-        System.out.println(newURL.build());
+        //System.out.println(newURL.build());
 
         //url = "https://newsapi.org/v2/everything?q=bitcoin&apiKey=2f62c3bf2ba84f97adb6eaf246dccced";
         Request request = new Request.Builder()

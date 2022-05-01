@@ -12,9 +12,6 @@ public class App extends Application {
         //Menu menu = new Menu();
         //menu.start();
         launch();
-
-        //AppController ctrl = new AppController();
-        //System.out.println(ctrl.getTopHeadlinesAustria());
     }
 
     @Override

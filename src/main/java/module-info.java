@@ -1,6 +1,7 @@
 module NewsApp {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
     requires okhttp3;
     requires com.google.gson;
 

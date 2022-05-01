@@ -1,6 +1,5 @@
 package at.ac.fhcampuswien;
 
-import at.ac.fhcampuswien.enums.CategoryEnum;
 import at.ac.fhcampuswien.enums.CountryEnum;
 import at.ac.fhcampuswien.enums.EndpointEnum;
 
@@ -24,7 +23,7 @@ public class AppController {
 
     }
 
-    //resets all the enum values uses in the NewsApi class
+    //resets all the enum values used in the NewsApi class
     public void resetNewsApi(){
         NewsApi.categoryEnum = null;
         NewsApi.countryEnum = null;

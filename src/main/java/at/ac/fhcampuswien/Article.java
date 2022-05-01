@@ -4,6 +4,7 @@ public class Article {
     private String title;
     private String author;
     private String description;
+    private String url;
 
     public Article(String author, String title) {
         this.author = author;
@@ -16,6 +17,10 @@ public class Article {
 
     public String getTitle() {
         return this.title;
+    }
+
+    public String getUrl(){
+        return this.url;
     }
 
     @Override
