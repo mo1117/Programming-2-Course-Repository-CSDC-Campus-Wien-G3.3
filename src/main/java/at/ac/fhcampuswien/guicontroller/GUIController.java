@@ -34,8 +34,10 @@ public class GUIController {
     @FXML
     public void buttonHeadlinesAustriaClicked() throws IOException {
         vbox.setVisible(true);
-
         //Left Button is invisible if we are on page 1 - topHeadlines = true because we are looking at the topHeadlines
+
+        if(this.bitcoin)
+            count=0;
 
         if (count == 0)
             buttonLeft.setVisible(false);
@@ -64,10 +66,12 @@ public class GUIController {
     @FXML
     public void buttonBitcoinClicked() throws IOException {
         vbox.setVisible(true);
-
         //Left Button is invisible if we are on page 1 - bitcoin = true because we are looking at the bitcoin news
 
-        if (count == 0)
+        if(this.topHeadlines)
+            count=0;
+
+        if (count == 0 ||false)
             buttonLeft.setVisible(false);
         else
             buttonLeft.setVisible(true);
