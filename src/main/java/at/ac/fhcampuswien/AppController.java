@@ -14,7 +14,7 @@ public class AppController {
     private NewsResponse newsResponse;
     private NewsApi newsApi = new NewsApi();
 
-    public AppController(){
+    public AppController() {
         this.articleCount = 0;
         this.articles = null;
     }
@@ -24,7 +24,7 @@ public class AppController {
     }
 
     //resets all the enum values used in the NewsApi class
-    public void resetNewsApi(){
+    public void resetNewsApi() {
         NewsApi.categoryEnum = null;
         NewsApi.countryEnum = null;
         NewsApi.endpointEnum = null;
@@ -33,7 +33,9 @@ public class AppController {
         NewsApi.query = null;
     }
 
-    public void setArticles(List<Article> articles) {
+    public void setArticles(List<Article> articles) throws NewsAPIException { //NewsAPIException
+        if (articles == null)
+            throw new NewsAPIException("Cannot set an empty Article!");
         this.articles = articles;
         this.articleCount = articles.size();
     }
@@ -42,12 +44,20 @@ public class AppController {
         return this.articleCount;
     }
 
-    public List<Article> getTopHeadlinesAustria() throws IOException {
+    public List<Article> getTopHeadlinesAustria() {
         resetNewsApi();
         NewsApi.countryEnum = CountryEnum.at;
         NewsApi.endpointEnum = EndpointEnum.topHeadlines;
-        this.newsResponse = this.newsApi.request();
-        this.setArticles(newsResponse.getArticles());
+        try {
+            this.newsResponse = this.newsApi.request();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            this.setArticles(newsResponse.getArticles());
+        } catch (NewsAPIException e) {
+            System.out.println(e.getMessage());
+        }
         return this.articles;
     }
 
@@ -61,12 +71,20 @@ public class AppController {
         return articlesNew;
     }
 
-    public List<Article> getAllNewsBitcoin() throws IOException {
+    public List<Article> getAllNewsBitcoin() {
         resetNewsApi();
         NewsApi.endpointEnum = EndpointEnum.everything;
         NewsApi.query = "bitcoin";
-        this.newsResponse = this.newsApi.request();
-        this.setArticles(newsResponse.getArticles());
+        try {
+            this.newsResponse = this.newsApi.request();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            this.setArticles(newsResponse.getArticles());
+        } catch (NewsAPIException e) {
+            System.out.println(e.getMessage());
+        }
         return this.articles;
     }
 }

@@ -35,7 +35,7 @@ public class GUIController {
     private Button seeArticle = new Button();
 
     @FXML
-    public void buttonHeadlinesAustriaClicked() throws IOException {
+    public void buttonHeadlinesAustriaClicked() {
         vbox.setVisible(true);
         seeArticle.setVisible(true);
         //Left Button is invisible if we are on page 1 - topHeadlines = true because we are looking at the topHeadlines
@@ -69,7 +69,7 @@ public class GUIController {
     }
 
     @FXML
-    public void buttonBitcoinClicked() throws IOException {
+    public void buttonBitcoinClicked() {
         vbox.setVisible(true);
         seeArticle.setVisible(true);
         //Left Button is invisible if we are on page 1 - bitcoin = true because we are looking at the bitcoin news
@@ -103,7 +103,7 @@ public class GUIController {
     }
 
     @FXML
-    public void buttonLeftClicked() throws IOException {
+    public void buttonLeftClicked() {
         this.count--;
         if (this.topHeadlines)
             buttonHeadlinesAustriaClicked();
@@ -112,7 +112,7 @@ public class GUIController {
     }
 
     @FXML
-    public void buttonRightClicked() throws IOException {
+    public void buttonRightClicked() {
         this.count++;
         if (this.topHeadlines)
             buttonHeadlinesAustriaClicked();
@@ -132,13 +132,17 @@ public class GUIController {
     }
 
     @FXML
-    public void seeArticleClicked() throws IOException{
+    public void seeArticleClicked() {
         String url = new String();
         if (this.topHeadlines)
             url = ctrl.getTopHeadlinesAustria().get(this.count).getUrl();
         else
             url = ctrl.getAllNewsBitcoin().get(this.count).getUrl();
-        java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
+        try {
+            java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
     @FXML

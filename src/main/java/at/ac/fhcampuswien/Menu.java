@@ -1,6 +1,5 @@
 package at.ac.fhcampuswien;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Menu{
@@ -16,7 +15,7 @@ public class Menu{
     public Menu() {
     }
 
-    public void start() throws IOException {
+    public void start() {
         Scanner scanner = new Scanner(System.in);
         String input = new String();
 
@@ -29,7 +28,7 @@ public class Menu{
         }
     }
 
-    private void handleInput(String input) throws IOException{
+    private void handleInput(String input) {
         if (input.equals("a")) {
             getTopHeadlinesAustria(controller);
         } else if (input.equals("b")) {
@@ -47,11 +46,11 @@ public class Menu{
         System.out.println(ctrl.getArticleCount());
     }
 
-    private void getTopHeadlinesAustria(AppController ctrl) throws IOException {
+    private void getTopHeadlinesAustria(AppController ctrl) {
         System.out.println(ctrl.getTopHeadlinesAustria());
     }
 
-    private void getAllNewsBitcoin(AppController ctrl) throws IOException {
+    private void getAllNewsBitcoin(AppController ctrl) {
         System.out.println(ctrl.getAllNewsBitcoin());
     }
 
