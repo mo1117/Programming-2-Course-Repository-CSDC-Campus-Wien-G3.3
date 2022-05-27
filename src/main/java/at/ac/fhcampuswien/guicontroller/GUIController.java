@@ -7,7 +7,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.BufferedInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URL;
 
 public class GUIController {
 
@@ -35,9 +38,13 @@ public class GUIController {
     private Button seeArticle = new Button();
 
     @FXML
+    private Button downloadArticle = new Button();
+
+    @FXML
     public void buttonHeadlinesAustriaClicked() {
         vbox.setVisible(true);
         seeArticle.setVisible(true);
+        downloadArticle.setVisible(true);
         //Left Button is invisible if we are on page 1 - topHeadlines = true because we are looking at the topHeadlines
         //if we changed from bitcoinNews to topHeadlines - set count to 0
 
@@ -72,6 +79,7 @@ public class GUIController {
     public void buttonBitcoinClicked() {
         vbox.setVisible(true);
         seeArticle.setVisible(true);
+        downloadArticle.setVisible(true);
         //Left Button is invisible if we are on page 1 - bitcoin = true because we are looking at the bitcoin news
         //If we changed from topHeadlines to bitcoinNews - set count to 0
 
@@ -123,6 +131,7 @@ public class GUIController {
     @FXML
     public void buttonCountClicked() {
         seeArticle.setVisible(false);
+        downloadArticle.setVisible(false);
         buttonRight.setVisible(false);
         buttonLeft.setVisible(false);
         vbox.getChildren().clear();
@@ -140,9 +149,20 @@ public class GUIController {
             url = ctrl.getAllNewsBitcoin().get(this.count).getUrl();
         try {
             java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    public void downloadArticleClicked() {
+        String url = new String();
+        if (this.topHeadlines)
+            url = ctrl.getTopHeadlinesAustria().get(this.count).getUrl();
+        else
+            url = ctrl.getAllNewsBitcoin().get(this.count).getUrl();
+
+        //Code for textfile download here
     }
 
     @FXML

@@ -65,8 +65,12 @@ public class AppController {
         List<Article> articlesNew = new LinkedList();
         if (articles != null)
             for (Article x : articles) {
-                if (x.getTitle().toLowerCase().contains(query.toLowerCase()))
-                    articlesNew.add(x);
+                try {
+                    if (x.getTitle().toLowerCase().contains(query.toLowerCase()))
+                        articlesNew.add(x);
+                }catch (NewsAPIException e){
+                    e.getMessage();
+                }
             }
         return articlesNew;
     }

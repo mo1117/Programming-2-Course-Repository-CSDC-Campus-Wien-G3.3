@@ -11,15 +11,28 @@ public class Article {
         this.title = title;
     }
 
-    public String getAuthor() {
-        return this.author;
+    public String getAuthor() throws NewsAPIException {
+        if (this.author == null)
+            throw new NewsAPIException("The author of this article is missing!");
+        else
+            return this.author;
     }
 
-    public String getTitle() {
-        return this.title;
+    public String getTitle() throws NewsAPIException {
+        if (this.title == null)
+            throw new NewsAPIException("The title of this article is missing!");
+        else
+            return this.title;
     }
 
-    public String getUrl(){
+    public String getDescription() throws NewsAPIException {
+        if (this.description == null)
+            throw new NewsAPIException("The description of this article is missing!");
+        else
+            return this.description;
+    }
+
+    public String getUrl() {
         return this.url;
     }
 
@@ -28,56 +41,61 @@ public class Article {
         StringBuilder output = new StringBuilder();
 
         //Title
-        if (this.title == null)
-            output.append("Title: Unknown" + System.lineSeparator());
-        else {
-            if (this.title.length() < 60)
-                output.append("Title: " + this.title + System.lineSeparator());
+        try {
+            if (this.getTitle().length() < 60)
+                output.append("Title: " + this.getTitle() + System.lineSeparator());
             else {
                 boolean linebreak = false;
                 output.append("Title: ");
-                for (int i = 0; i < this.title.length(); i++) {
-                    output.append(this.title.charAt(i));
+                for (int i = 0; i < this.getTitle().length(); i++) {
+                    output.append(this.getTitle().charAt(i));
                     if (i % 60 == 0 && i != 0)
                         linebreak = true;
-                    if (linebreak && this.title.charAt(i) == 32) {
+                    if (linebreak && this.getTitle().charAt(i) == 32) {
                         output.append(System.lineSeparator());
                         linebreak = false;
                     }
                 }
                 output.append(System.lineSeparator());
             }
+        } catch (NewsAPIException e) {
+            System.out.println(e.getMessage());
+            System.out.println("The title will be set to 'Unknown' instead!");
+            output.append("Title: Unknown" + System.lineSeparator());
         }
 
         //Author
-        if (this.author == null)
+        try {
+            output.append("Author: " + this.getAuthor() + System.lineSeparator());
+        } catch (NewsAPIException e) {
+            System.out.println(e.getMessage());
+            System.out.println("The author will be set to 'Unknown' instead!");
             output.append("Author: Unknown" + System.lineSeparator());
-        else
-            output.append("Author: " + this.author + System.lineSeparator());
+        }
 
         //Description
-        if (this.description == null)
-            output.append("Description: Unknown" + System.lineSeparator());
-        else {
-            if (this.description.length() < 60)
-                output.append("Description: " + this.description + System.lineSeparator());
+        try {
+            if (this.getDescription().length() < 60)
+                output.append("Description: " + this.getDescription() + System.lineSeparator());
             else {
                 boolean linebreak = false;
                 output.append("Description: ");
-                for (int i = 0; i < this.description.length(); i++) {
-                    output.append(this.description.charAt(i));
+                for (int i = 0; i < this.getDescription().length(); i++) {
+                    output.append(this.getDescription().charAt(i));
                     if (i % 60 == 0 && i != 0)
                         linebreak = true;
-                    if (linebreak && this.description.charAt(i) == 32) {
+                    if (linebreak && this.getDescription().charAt(i) == 32) {
                         output.append(System.lineSeparator());
                         linebreak = false;
                     }
                 }
                 output.append(System.lineSeparator());
             }
+        } catch (NewsAPIException e) {
+            System.out.println(e.getMessage());
+            System.out.println("The description will be set to 'Unknown' instead!");
+            output.append("Description: Unknown");
         }
         return output.toString();
     }
-
-
 }
