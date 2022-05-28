@@ -4,8 +4,11 @@ import at.ac.fhcampuswien.enums.CountryEnum;
 import at.ac.fhcampuswien.enums.EndpointEnum;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.OptionalInt;
+import java.util.stream.Collectors;
 
 public class AppController {
 
@@ -90,5 +93,20 @@ public class AppController {
             System.out.println(e.getMessage());
         }
         return this.articles;
+    }
+
+    public String getLongestAuthorName(){
+
+        return articles.stream().map(article -> {
+            try {
+                return article.getAuthor();
+            } catch (NewsAPIException e) {
+                return "";
+            }
+        }).reduce((s1,s2)->s1.length() >= s2.length() ? s1 : s2).get();
+    }
+
+    public String getNYT() {
+        return String.valueOf(articles.stream().filter(a -> a.getUrl().contains("nytimes.com")).count());
     }
 }
