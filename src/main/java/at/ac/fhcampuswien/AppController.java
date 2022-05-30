@@ -113,16 +113,11 @@ public class AppController {
             }
         }
 
-
-        Map<String, Long> temp = sources.stream()
-                .collect(Collectors.groupingBy(a -> a, Collectors.counting()));
-
-
-        return new HashSet<>(temp.values()).size() < temp.size() ?
-                null : temp.entrySet()
-                .stream()
-                .max(Map.Entry.comparingByValue())
-                .map(Map.Entry::getKey).get();
+        return sources.stream()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .entrySet().stream()
+                .max(Map.Entry.comparingByValue()).map(Map.Entry::getKey)
+                .orElse(null);
 
     }
 
