@@ -8,9 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.BufferedInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 
 public class GUIController {
@@ -207,7 +205,15 @@ public class GUIController {
             System.out.println(e.getMessage());
         }
 
-        //Code for textfile download here
+        /*Code for textfile download here
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"));
+            writer.write();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+*/
     }
 
     @FXML
