@@ -124,13 +124,6 @@ public class AppController {
                 .max(Map.Entry.comparingByValue())
                 .map(Map.Entry::getKey).get();
 
-        /*
-        return articles.stream().map(Article::getAuthor)
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
-                .entrySet().stream()
-                .max(Map.Entry.comparingByValue()).map(Map.Entry::getKey)
-                .orElse(null);
- */
     }
 
     public String getLongestAuthorName() {
