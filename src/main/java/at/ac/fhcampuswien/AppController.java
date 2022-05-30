@@ -169,19 +169,14 @@ public class AppController {
     }
 
     public List<Article> SortByDescriptionLength(List<Article> list){
-
+        /*
         return list.stream()
-                .sorted( article -> {
-                    try {
-                        return Comparator.comparingInt(Article::getDescriptionLength);
-                    } catch (NewsAPIException e) {
-                        System.out.println(e.getMessage());
-                        return false;
-                    }
-                })
+                .sorted(Comparator.comparingInt(Article::getDescriptionLength))
                 .collect(Collectors.toList());
-
+        */
+        return null;
     }
+
 
 
 }
