@@ -174,7 +174,7 @@ public class AppController {
                 .sorted( article -> {
                     try {
                         return Comparator.comparingInt(Article::getDescriptionLength);
-                    } catch (RuntimeException e) {
+                    } catch (NewsAPIException e) {
                         System.out.println(e.getMessage());
                         return false;
                     }
@@ -182,7 +182,6 @@ public class AppController {
                 .collect(Collectors.toList());
 
     }
-
 
 
 }

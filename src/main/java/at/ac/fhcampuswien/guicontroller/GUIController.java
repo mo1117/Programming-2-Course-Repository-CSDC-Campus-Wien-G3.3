@@ -1,7 +1,6 @@
 package at.ac.fhcampuswien.guicontroller;
 
 import at.ac.fhcampuswien.AppController;
-import at.ac.fhcampuswien.Article;
 import at.ac.fhcampuswien.NewsAPIException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,7 +9,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.*;
-import java.net.URL;
 
 public class GUIController {
 
@@ -47,14 +45,13 @@ public class GUIController {
     private Button provider = new Button();
 
     @FXML
-    private Button author= new Button();
+    private Button author = new Button();
 
     @FXML
     private Button source = new Button();
 
     @FXML
     private Button desLength = new Button();
-
 
 
     @FXML
@@ -169,7 +166,7 @@ public class GUIController {
         vbox.getChildren().clear();
         try {
             label.setText("There are currently " + (ctrl.getArticleCount()) + " Article(s) available!");
-        }catch(NewsAPIException e){
+        } catch (NewsAPIException e) {
             System.out.println(e.getMessage());
         }
         vbox.getChildren().add(label);
@@ -184,7 +181,7 @@ public class GUIController {
                 url = ctrl.getTopHeadlinesAustria().get(this.count).getUrl();
             else
                 url = ctrl.getAllNewsBitcoin().get(this.count).getUrl();
-        } catch(NewsAPIException e){
+        } catch (NewsAPIException e) {
             System.out.println(e.getMessage());
         }
         try {
@@ -196,25 +193,25 @@ public class GUIController {
 
     @FXML
     public void downloadArticleClicked() {
-        String url = new String();
+        //Code for textfile download here
         try {
-            if (this.topHeadlines)
-                url = ctrl.getTopHeadlinesAustria().get(this.count).getUrl();
-            else
-                url = ctrl.getAllNewsBitcoin().get(this.count).getUrl();
-        } catch(NewsAPIException e){
-            System.out.println(e.getMessage());
-        }
-
-        /*Code for textfile download here
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"));
-            writer.write();
+            BufferedWriter writer;
+            if (this.topHeadlines) {
+                writer = new BufferedWriter(new FileWriter(ctrl.getTopHeadlinesAustria().get(this.count).getTitle() + ".txt"));
+                writer.write(ctrl.getTopHeadlinesAustria().get(this.count).toString());
+                System.out.println("Check the folder where this project is stored!");
+            }
+            else {
+                writer = new BufferedWriter(new FileWriter(ctrl.getAllNewsBitcoin().get(this.count).getTitle() + ".txt"));
+                writer.write(ctrl.getAllNewsBitcoin().get(this.count).toString());
+                System.out.println("Check the folder where this project is stored!");
+            }
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch(NewsAPIException e){
+            System.out.println(e.getMessage());
         }
-*/
     }
 
     @FXML
@@ -225,16 +222,12 @@ public class GUIController {
 
     @FXML
     public void fifteenClicked() {
-
-        if(bitcoin) {
-
-            buttonLeft.setVisible(false);
-            buttonRight.setVisible(true);
-
-            //clear the vbox
-            vbox.getChildren().clear();
-            StringBuilder text = new StringBuilder();
-
+        buttonLeft.setVisible(false);
+        buttonRight.setVisible(true);
+        //clear the vbox
+        vbox.getChildren().clear();
+        StringBuilder text = new StringBuilder();
+        if (bitcoin) {
             if (ctrl.getHeadlineSmallerFifteen(ctrl.getAllNewsBitcoin()).size() != 0)
                 text.append(ctrl.getHeadlineSmallerFifteen(ctrl.getAllNewsBitcoin()).get(this.count));
 
@@ -249,14 +242,6 @@ public class GUIController {
             label.setText(text.toString());
             vbox.getChildren().add(label);
         } else {
-
-            buttonLeft.setVisible(false);
-            buttonRight.setVisible(true);
-
-            //clear the vbox
-            vbox.getChildren().clear();
-            StringBuilder text = new StringBuilder();
-
             if (ctrl.getHeadlineSmallerFifteen(ctrl.getTopHeadlinesAustria()).size() != 0)
                 text.append(ctrl.getHeadlineSmallerFifteen(ctrl.getTopHeadlinesAustria()).get(this.count));
 
@@ -276,15 +261,14 @@ public class GUIController {
 
 
     @FXML
-    public void desLengthClicked() throws NewsAPIException {
-        if(bitcoin) {
+    public void desLengthClicked() {
+        buttonLeft.setVisible(false);
+        buttonRight.setVisible(true);
+        //clear the vbox
+        vbox.getChildren().clear();
+        StringBuilder text = new StringBuilder();
 
-            buttonLeft.setVisible(false);
-            buttonRight.setVisible(true);
-
-            //clear the vbox
-            vbox.getChildren().clear();
-            StringBuilder text = new StringBuilder();
+        if (bitcoin) {
 
             if (ctrl.SortByDescriptionLength(ctrl.getAllNewsBitcoin()).size() != 0)
                 text.append(ctrl.SortByDescriptionLength(ctrl.getAllNewsBitcoin()).get(this.count));
@@ -296,13 +280,6 @@ public class GUIController {
             label.setText(text.toString());
             vbox.getChildren().add(label);
         } else {
-
-            buttonLeft.setVisible(false);
-            buttonRight.setVisible(true);
-
-            //clear the vbox
-            vbox.getChildren().clear();
-            StringBuilder text = new StringBuilder();
 
             if (ctrl.SortByDescriptionLength(ctrl.getTopHeadlinesAustria()).size() != 0)
                 text.append(ctrl.SortByDescriptionLength(ctrl.getTopHeadlinesAustria()).get(this.count));
@@ -333,10 +310,14 @@ public class GUIController {
     }
 
     @FXML
-    public void sourceClicked() throws NewsAPIException {
+    public void sourceClicked() {
         vbox.getChildren().clear();
 
-        label.setText(ctrl.getMostArticles());
+        try {
+            label.setText(ctrl.getMostArticles());
+        } catch (NewsAPIException e) {
+            System.out.println(e.getMessage());
+        }
         vbox.getChildren().add(label);
     }
 }
