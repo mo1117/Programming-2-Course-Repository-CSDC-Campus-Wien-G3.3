@@ -32,11 +32,8 @@ public class Article {
             return this.description;
     }
 
-    public int getDescriptionLength() throws NewsAPIException {
-        if (this.description == null)
-            throw new NewsAPIException("The description of this article is missing!");
-        else
-            return this.description.length();
+    public int getDescriptionLength() {
+        return this.description.length();
     }
 
     public String getUrl() throws NewsAPIException {

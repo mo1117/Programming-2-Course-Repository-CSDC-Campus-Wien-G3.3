@@ -1,6 +1,7 @@
 package at.ac.fhcampuswien.guicontroller;
 
 import at.ac.fhcampuswien.AppController;
+import at.ac.fhcampuswien.Article;
 import at.ac.fhcampuswien.NewsAPIException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,13 +10,15 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.util.List;
 
 public class GUIController {
 
     private AppController ctrl = new AppController();
+    private List<Article> articles;
     private Stage stage;
     private int count = 0;
-    private boolean topHeadlines = false, bitcoin = false;
+    private boolean topHeadlines = false, bitcoin = false, descriptionLength = false, fifteenBool = false;
 
     @FXML
     private VBox vbox = new VBox();
@@ -78,6 +81,8 @@ public class GUIController {
 
         this.topHeadlines = true;
         this.bitcoin = false;
+        this.descriptionLength = false;
+        this.fifteenBool = false;
 
         //clear the vbox
         vbox.getChildren().clear();
@@ -118,6 +123,8 @@ public class GUIController {
 
         this.bitcoin = true;
         this.topHeadlines = false;
+        this.descriptionLength = false;
+        this.fifteenBool = false;
 
         //clear the vbox
         vbox.getChildren().clear();
@@ -137,19 +144,27 @@ public class GUIController {
     @FXML
     public void buttonLeftClicked() {
         this.count--;
-        if (this.topHeadlines)
-            buttonHeadlinesAustriaClicked();
-        else
+        if(this.fifteenBool)
+            fifteenClicked();
+        else if (this.descriptionLength)
+            desLengthClicked();
+        else if (this.bitcoin)
             buttonBitcoinClicked();
+        else
+            buttonHeadlinesAustriaClicked();
     }
 
     @FXML
     public void buttonRightClicked() {
         this.count++;
-        if (this.topHeadlines)
-            buttonHeadlinesAustriaClicked();
-        else
+        if(this.fifteenBool)
+            fifteenClicked();
+        else if (this.descriptionLength)
+            desLengthClicked();
+        else if (this.bitcoin)
             buttonBitcoinClicked();
+        else
+            buttonHeadlinesAustriaClicked();
     }
 
     @FXML
@@ -200,8 +215,7 @@ public class GUIController {
                 writer = new BufferedWriter(new FileWriter(ctrl.getTopHeadlinesAustria().get(this.count).getTitle() + ".txt"));
                 writer.write(ctrl.getTopHeadlinesAustria().get(this.count).toString());
                 System.out.println("Check the folder where this project is stored!");
-            }
-            else {
+            } else {
                 writer = new BufferedWriter(new FileWriter(ctrl.getAllNewsBitcoin().get(this.count).getTitle() + ".txt"));
                 writer.write(ctrl.getAllNewsBitcoin().get(this.count).toString());
                 System.out.println("Check the folder where this project is stored!");
@@ -209,7 +223,7 @@ public class GUIController {
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
-        } catch(NewsAPIException e){
+        } catch (NewsAPIException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -222,34 +236,42 @@ public class GUIController {
 
     @FXML
     public void fifteenClicked() {
-        buttonLeft.setVisible(false);
+        //reset count
+        //this boolean is used for the buttons
+        if(!this.fifteenBool)
+            count = 0;
+
+        if (this.count == 0)
+            buttonLeft.setVisible(false);
+        else
+            buttonLeft.setVisible(true);
+
+        this.fifteenBool = true;
+        this.descriptionLength = false;
         buttonRight.setVisible(true);
         //clear the vbox
         vbox.getChildren().clear();
         StringBuilder text = new StringBuilder();
-        if (bitcoin) {
-            if (ctrl.getHeadlineSmallerFifteen(ctrl.getAllNewsBitcoin()).size() != 0)
-                text.append(ctrl.getHeadlineSmallerFifteen(ctrl.getAllNewsBitcoin()).get(this.count));
-
-            //if there are no more articles disable the right button
-            if (ctrl.getHeadlineSmallerFifteen(ctrl.getAllNewsBitcoin()).size() - 1 == this.count)
+        if (this.bitcoin) {
+            this.articles = ctrl.getHeadlineSmallerFifteen(ctrl.getAllNewsBitcoin());
+            if (this.articles.size() != 0)
+                text.append(this.articles.get(this.count));
+            else
+                text.append("No article with a title length smaller than 15 available!");
+            if (articles.size() - 1 == this.count)
                 buttonRight.setVisible(false);
-
-            if (ctrl.getHeadlineSmallerFifteen(ctrl.getTopHeadlinesAustria()).size() == 0) {
+            if (articles.size() == 0)
                 buttonRight.setVisible(false);
-            }
-
-            label.setText(text.toString());
-            vbox.getChildren().add(label);
-        } else {
-            if (ctrl.getHeadlineSmallerFifteen(ctrl.getTopHeadlinesAustria()).size() != 0)
-                text.append(ctrl.getHeadlineSmallerFifteen(ctrl.getTopHeadlinesAustria()).get(this.count));
-
-            //if there are no more articles disable the right button
-            if (ctrl.getHeadlineSmallerFifteen(ctrl.getTopHeadlinesAustria()).size() - 1 == this.count)
+        }
+        else {
+            this.articles = ctrl.getHeadlineSmallerFifteen(ctrl.getTopHeadlinesAustria());
+            if (this.articles.size() != 0)
+                text.append(this.articles.get(this.count));
+            else
+                text.append("No article with a title length smaller than 15 available!");
+            if (articles.size() - 1 == this.count)
                 buttonRight.setVisible(false);
-
-            if (ctrl.getHeadlineSmallerFifteen(ctrl.getTopHeadlinesAustria()).size() == 0) {
+            if (articles.size() == 0)
                 buttonRight.setVisible(false);
             }
 
@@ -257,35 +279,42 @@ public class GUIController {
             vbox.getChildren().add(label);
         }
 
-    }
-
 
     @FXML
     public void desLengthClicked() {
-        buttonLeft.setVisible(false);
+        //reset count
+        //this boolean is used for the buttons
+        if (!this.descriptionLength)
+            this.count = 0;
+
+        if (this.count == 0)
+            buttonLeft.setVisible(false);
+        else
+            buttonLeft.setVisible(true);
+
         buttonRight.setVisible(true);
+        this.descriptionLength = true;
+        this.fifteenBool = false;
         //clear the vbox
         vbox.getChildren().clear();
         StringBuilder text = new StringBuilder();
 
-        if (bitcoin) {
+        if (this.bitcoin) {
 
-            if (ctrl.SortByDescriptionLength(ctrl.getAllNewsBitcoin()).size() != 0)
-                text.append(ctrl.SortByDescriptionLength(ctrl.getAllNewsBitcoin()).get(this.count));
-
-            //if there are no more articles disable the right button
-            if (ctrl.SortByDescriptionLength(ctrl.getAllNewsBitcoin()).size() - 1 == this.count)
+            this.articles = ctrl.SortByDescriptionLength(ctrl.getAllNewsBitcoin());
+            if (this.articles.size() != 0)
+                text.append(articles.get(this.count));
+            if (articles.size() - 1 == this.count)
                 buttonRight.setVisible(false);
 
             label.setText(text.toString());
             vbox.getChildren().add(label);
         } else {
 
-            if (ctrl.SortByDescriptionLength(ctrl.getTopHeadlinesAustria()).size() != 0)
-                text.append(ctrl.SortByDescriptionLength(ctrl.getTopHeadlinesAustria()).get(this.count));
-
-            //if there are no more articles disable the right button
-            if (ctrl.SortByDescriptionLength(ctrl.getTopHeadlinesAustria()).size() - 1 == this.count)
+            this.articles = ctrl.SortByDescriptionLength(ctrl.getTopHeadlinesAustria());
+            if (this.articles.size() != 0)
+                text.append(articles.get(this.count));
+            if (articles.size() - 1 == this.count)
                 buttonRight.setVisible(false);
 
             label.setText(text.toString());
@@ -295,6 +324,8 @@ public class GUIController {
 
     @FXML
     public void authorClicked() {
+        buttonLeft.setVisible(false);
+        buttonRight.setVisible(false);
         vbox.getChildren().clear();
 
         label.setText(ctrl.getLongestAuthorName());
@@ -303,6 +334,8 @@ public class GUIController {
 
     @FXML
     public void providerClicked() {
+        buttonLeft.setVisible(false);
+        buttonRight.setVisible(false);
         vbox.getChildren().clear();
 
         label.setText(ctrl.getNYT());
@@ -311,13 +344,11 @@ public class GUIController {
 
     @FXML
     public void sourceClicked() {
+        buttonLeft.setVisible(false);
+        buttonRight.setVisible(false);
         vbox.getChildren().clear();
 
-        try {
-            label.setText(ctrl.getMostArticles());
-        } catch (NewsAPIException e) {
-            System.out.println(e.getMessage());
-        }
+        label.setText(ctrl.getMostArticles());
         vbox.getChildren().add(label);
     }
 }
