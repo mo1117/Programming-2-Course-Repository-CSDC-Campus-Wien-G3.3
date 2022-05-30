@@ -32,8 +32,11 @@ public class Article {
             return this.description;
     }
 
-    public String getUrl() {
-        return this.url;
+    public String getUrl() throws NewsAPIException {
+        if (this.url == null)
+            throw new NewsAPIException("The URL of this article is missing!");
+        else
+            return this.url;
     }
 
     @Override

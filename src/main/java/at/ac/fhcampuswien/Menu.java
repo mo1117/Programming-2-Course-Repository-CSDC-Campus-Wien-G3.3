@@ -43,7 +43,11 @@ public class Menu{
     }
 
     private void getArticleCount(AppController ctrl) {
-        System.out.println(ctrl.getArticleCount());
+        try {
+            System.out.println(ctrl.getArticleCount());
+        }catch(NewsAPIException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     private void getTopHeadlinesAustria(AppController ctrl) {

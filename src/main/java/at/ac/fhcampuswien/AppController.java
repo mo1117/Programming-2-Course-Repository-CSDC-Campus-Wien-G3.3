@@ -12,13 +12,11 @@ import java.util.stream.Collectors;
 
 public class AppController {
 
-    private int articleCount;
     private List<Article> articles;
     private NewsResponse newsResponse;
     private NewsApi newsApi = new NewsApi();
 
     public AppController() {
-        this.articleCount = 0;
         this.articles = null;
     }
 
@@ -36,15 +34,17 @@ public class AppController {
         NewsApi.query = null;
     }
 
-    public void setArticles(List<Article> articles) throws NewsAPIException { //NewsAPIException
+    public void setArticles(List<Article> articles) throws NewsAPIException {
         if (articles == null)
-            throw new NewsAPIException("Cannot set an empty Article!");
+            throw new NewsAPIException("Cannot set an empty list!");
         this.articles = articles;
-        this.articleCount = articles.size();
     }
 
-    public int getArticleCount() {
-        return this.articleCount;
+    public int getArticleCount() throws NewsAPIException {
+        if (this.articles == null)
+            throw new NewsAPIException("This list seems to be empty!");
+        else
+            return this.articles.size();
     }
 
     public List<Article> getTopHeadlinesAustria() {
@@ -71,7 +71,7 @@ public class AppController {
                 try {
                     if (x.getTitle().toLowerCase().contains(query.toLowerCase()))
                         articlesNew.add(x);
-                }catch (NewsAPIException e){
+                } catch (NewsAPIException e) {
                     e.getMessage();
                 }
             }
@@ -95,18 +95,27 @@ public class AppController {
         return this.articles;
     }
 
-    public String getLongestAuthorName(){
-
+    public String getLongestAuthorName() {
         return articles.stream().map(article -> {
             try {
                 return article.getAuthor();
             } catch (NewsAPIException e) {
-                return "";
+                System.out.println(e.getMessage());
+                return null;
             }
-        }).reduce((s1,s2)->s1.length() >= s2.length() ? s1 : s2).get();
+        }).reduce((s1, s2) -> s1.length() >= s2.length() ? s1 : s2).get();
     }
 
-    public String getNYT() {
-        return String.valueOf(articles.stream().filter(a -> a.getUrl().contains("nytimes.com")).count());
+   /* public String getNYT() {
+        return String.valueOf(articles.stream().filter(a -> {
+            try {
+                return a.getUrl();
+            } catch (NewsAPIException e) {
+                System.out.println(e.getMessage());
+            }
+        }).count());
+
     }
+
+    */
 }

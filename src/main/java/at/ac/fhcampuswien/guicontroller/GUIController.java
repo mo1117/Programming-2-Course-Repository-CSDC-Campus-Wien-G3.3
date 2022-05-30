@@ -1,6 +1,7 @@
 package at.ac.fhcampuswien.guicontroller;
 
 import at.ac.fhcampuswien.AppController;
+import at.ac.fhcampuswien.NewsAPIException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -135,7 +136,11 @@ public class GUIController {
         buttonRight.setVisible(false);
         buttonLeft.setVisible(false);
         vbox.getChildren().clear();
-        label.setText("There are currently " + (ctrl.getArticleCount()) + " Article(s) available!");
+        try {
+            label.setText("There are currently " + (ctrl.getArticleCount()) + " Article(s) available!");
+        }catch(NewsAPIException e){
+            System.out.println(e.getMessage());
+        }
         vbox.getChildren().add(label);
         vbox.setVisible(true);
     }
@@ -143,10 +148,14 @@ public class GUIController {
     @FXML
     public void seeArticleClicked() {
         String url = new String();
-        if (this.topHeadlines)
-            url = ctrl.getTopHeadlinesAustria().get(this.count).getUrl();
-        else
-            url = ctrl.getAllNewsBitcoin().get(this.count).getUrl();
+        try {
+            if (this.topHeadlines)
+                url = ctrl.getTopHeadlinesAustria().get(this.count).getUrl();
+            else
+                url = ctrl.getAllNewsBitcoin().get(this.count).getUrl();
+        } catch(NewsAPIException e){
+            System.out.println(e.getMessage());
+        }
         try {
             java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
         } catch (IOException e) {
@@ -157,10 +166,14 @@ public class GUIController {
     @FXML
     public void downloadArticleClicked() {
         String url = new String();
-        if (this.topHeadlines)
-            url = ctrl.getTopHeadlinesAustria().get(this.count).getUrl();
-        else
-            url = ctrl.getAllNewsBitcoin().get(this.count).getUrl();
+        try {
+            if (this.topHeadlines)
+                url = ctrl.getTopHeadlinesAustria().get(this.count).getUrl();
+            else
+                url = ctrl.getAllNewsBitcoin().get(this.count).getUrl();
+        } catch(NewsAPIException e){
+            System.out.println(e.getMessage());
+        }
 
         //Code for textfile download here
     }
