@@ -4,10 +4,8 @@ import at.ac.fhcampuswien.enums.CountryEnum;
 import at.ac.fhcampuswien.enums.EndpointEnum;
 
 import java.io.IOException;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.OptionalInt;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class AppController {
@@ -95,6 +93,26 @@ public class AppController {
         return this.articles;
     }
 
+    public String getMostArticles(){
+        OptionalInt max = articles.stream().map(article -> {
+            try {
+                return article.getAuthor();
+            } catch (NewsAPIException e) {
+                return "";
+            }
+        }).mapToInt(String::length).max();
+
+        Optional<String> name = articles.stream().map(article -> {
+            try {
+                return article.getAuthor();
+            } catch (NewsAPIException e) {
+                return "";
+            }
+        }).reduce((name1,name2 ) -> name1.length() >= name2.length() ? name1 : name2);
+
+        return name.get();
+    }
+
     public String getLongestAuthorName() {
         return articles.stream().map(article -> {
             try {
@@ -106,16 +124,14 @@ public class AppController {
         }).reduce((s1, s2) -> s1.length() >= s2.length() ? s1 : s2).get();
     }
 
-   /* public String getNYT() {
+    public String getNYT() {
         return String.valueOf(articles.stream().filter(a -> {
             try {
-                return a.getUrl();
+                return a.getUrl().contains("nytimes.com");
             } catch (NewsAPIException e) {
                 System.out.println(e.getMessage());
+                return false;
             }
         }).count());
-
     }
-
-    */
 }
