@@ -169,13 +169,10 @@ public class AppController {
     }
 
     public List<Article> SortByDescriptionLength(List<Article> list) {
-        try {
+
             return list.stream()
                     .sorted(Comparator.comparingInt(Article::getDescriptionLength))
                     .collect(Collectors.toList());
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+
     }
 }
