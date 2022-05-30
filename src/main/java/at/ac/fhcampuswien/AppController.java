@@ -168,10 +168,17 @@ public class AppController {
                 .collect(Collectors.toList());
     }
 
-    public List<Article> SortByDescriptionLength(List<Article> list) {
+    public List<Article> SortByDescriptionLength(List<Article> list){
 
         return list.stream()
-                .sorted()
+                .sorted( article -> {
+                    try {
+                        return Comparator.comparingInt(Article::getDescriptionLength);
+                    } catch (RuntimeException e) {
+                        System.out.println(e.getMessage());
+                        return false;
+                    }
+                })
                 .collect(Collectors.toList());
 
     }

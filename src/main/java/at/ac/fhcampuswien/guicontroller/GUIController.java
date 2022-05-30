@@ -242,6 +242,10 @@ public class GUIController {
             if (ctrl.getHeadlineSmallerFifteen(ctrl.getAllNewsBitcoin()).size() - 1 == this.count)
                 buttonRight.setVisible(false);
 
+            if (ctrl.getHeadlineSmallerFifteen(ctrl.getTopHeadlinesAustria()).size() == 0) {
+                buttonRight.setVisible(false);
+            }
+
             label.setText(text.toString());
             vbox.getChildren().add(label);
         } else {
@@ -260,6 +264,10 @@ public class GUIController {
             if (ctrl.getHeadlineSmallerFifteen(ctrl.getTopHeadlinesAustria()).size() - 1 == this.count)
                 buttonRight.setVisible(false);
 
+            if (ctrl.getHeadlineSmallerFifteen(ctrl.getTopHeadlinesAustria()).size() == 0) {
+                buttonRight.setVisible(false);
+            }
+
             label.setText(text.toString());
             vbox.getChildren().add(label);
         }
@@ -268,7 +276,7 @@ public class GUIController {
 
 
     @FXML
-    public void desLengthClicked() {
+    public void desLengthClicked() throws NewsAPIException {
         if(bitcoin) {
 
             buttonLeft.setVisible(false);
