@@ -98,7 +98,42 @@ public class AppController {
         return this.articles;
     }
 
-    public String getMostArticles(){
+    public String getMostArticles() throws NewsAPIException {
+
+
+        List<String> sources = new ArrayList<String>(20);
+
+        int count = 0;
+        for (int i = 0; i < articles.size()-1; i++) {
+            try {
+                sources.add(count, articles.get(i).getAuthor());
+                count++;
+            } catch (NewsAPIException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+
+        Map<String, Long> temp = sources.stream()
+                .collect(Collectors.groupingBy(a -> a, Collectors.counting()));
+
+
+        return new HashSet<>(temp.values()).size() < temp.size() ?
+                null : temp.entrySet()
+                .stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey).get();
+
+        /*
+        return articles.stream().map(Article::getAuthor)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .entrySet().stream()
+                .max(Map.Entry.comparingByValue()).map(Map.Entry::getKey)
+                .orElse(null);
+ */
+    }
+
+    public String getLongestAuthorName() {
         OptionalInt max = articles.stream().map(article -> {
             try {
                 return article.getAuthor();
@@ -118,17 +153,6 @@ public class AppController {
         return name.get();
     }
 
-    public String getLongestAuthorName() {
-        return articles.stream().map(article -> {
-            try {
-                return article.getAuthor();
-            } catch (NewsAPIException e) {
-                System.out.println(e.getMessage());
-                return null;
-            }
-        }).reduce((s1, s2) -> s1.length() >= s2.length() ? s1 : s2).get();
-    }
-
     public String getNYT() {
 
         return String.valueOf(articles.stream().filter(a -> {
@@ -143,32 +167,24 @@ public class AppController {
     }
 
     public List<Article> getHeadlineSmallerFifteen(List<Article> list) {
+
         return list.stream()
                 .filter(article -> {
                     try {
                         return article.getTitle().length() < 15;
                     } catch (NewsAPIException e) {
-                        e.printStackTrace();
+                        System.out.println(e.getMessage());
                         return false;
                     }
                 })
                 .collect(Collectors.toList());
     }
 
-    public List<Article> SortByDescriptionLength() {
-/*
-        return articles.stream()
-                .mapToInt(article -> {
-                    try {
-                        return article.getDescription.length();
-                    } catch (NewsAPIException e) {
-                        return 0;
-                    }
-                })
-                .sorted(Comparator.comparing(Article::getDescriptionLength))
+    public List<Article> SortByDescriptionLength(List<Article> list) {
+
+        return list.stream()
+                .sorted()
                 .collect(Collectors.toList());
-  */
-        return null;
 
     }
 

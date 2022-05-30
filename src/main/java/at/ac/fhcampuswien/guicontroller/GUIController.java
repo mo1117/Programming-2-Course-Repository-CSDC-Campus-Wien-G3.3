@@ -1,6 +1,7 @@
 package at.ac.fhcampuswien.guicontroller;
 
 import at.ac.fhcampuswien.AppController;
+import at.ac.fhcampuswien.Article;
 import at.ac.fhcampuswien.NewsAPIException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -218,15 +219,87 @@ public class GUIController {
 
     @FXML
     public void fifteenClicked() {
-        vbox.getChildren().clear();
-        ctrl.getHeadlineSmallerFifteen(ctrl.currentList());
+
+        if(bitcoin) {
+
+            buttonLeft.setVisible(false);
+            buttonRight.setVisible(true);
+
+            //clear the vbox
+            vbox.getChildren().clear();
+            StringBuilder text = new StringBuilder();
+
+            if (ctrl.getHeadlineSmallerFifteen(ctrl.getAllNewsBitcoin()).size() != 0)
+                text.append(ctrl.getHeadlineSmallerFifteen(ctrl.getAllNewsBitcoin()).get(this.count));
+
+            //if there are no more articles disable the right button
+            if (ctrl.getHeadlineSmallerFifteen(ctrl.getAllNewsBitcoin()).size() - 1 == this.count)
+                buttonRight.setVisible(false);
+
+            label.setText(text.toString());
+            vbox.getChildren().add(label);
+        } else {
+
+            buttonLeft.setVisible(false);
+            buttonRight.setVisible(true);
+
+            //clear the vbox
+            vbox.getChildren().clear();
+            StringBuilder text = new StringBuilder();
+
+            if (ctrl.getHeadlineSmallerFifteen(ctrl.getTopHeadlinesAustria()).size() != 0)
+                text.append(ctrl.getHeadlineSmallerFifteen(ctrl.getTopHeadlinesAustria()).get(this.count));
+
+            //if there are no more articles disable the right button
+            if (ctrl.getHeadlineSmallerFifteen(ctrl.getTopHeadlinesAustria()).size() - 1 == this.count)
+                buttonRight.setVisible(false);
+
+            label.setText(text.toString());
+            vbox.getChildren().add(label);
+        }
 
     }
 
 
     @FXML
     public void desLengthClicked() {
-        vbox.getChildren().clear();
+        if(bitcoin) {
+
+            buttonLeft.setVisible(false);
+            buttonRight.setVisible(true);
+
+            //clear the vbox
+            vbox.getChildren().clear();
+            StringBuilder text = new StringBuilder();
+
+            if (ctrl.SortByDescriptionLength(ctrl.getAllNewsBitcoin()).size() != 0)
+                text.append(ctrl.SortByDescriptionLength(ctrl.getAllNewsBitcoin()).get(this.count));
+
+            //if there are no more articles disable the right button
+            if (ctrl.SortByDescriptionLength(ctrl.getAllNewsBitcoin()).size() - 1 == this.count)
+                buttonRight.setVisible(false);
+
+            label.setText(text.toString());
+            vbox.getChildren().add(label);
+        } else {
+
+            buttonLeft.setVisible(false);
+            buttonRight.setVisible(true);
+
+            //clear the vbox
+            vbox.getChildren().clear();
+            StringBuilder text = new StringBuilder();
+
+            if (ctrl.SortByDescriptionLength(ctrl.getTopHeadlinesAustria()).size() != 0)
+                text.append(ctrl.SortByDescriptionLength(ctrl.getTopHeadlinesAustria()).get(this.count));
+
+            //if there are no more articles disable the right button
+            if (ctrl.SortByDescriptionLength(ctrl.getTopHeadlinesAustria()).size() - 1 == this.count)
+                buttonRight.setVisible(false);
+
+            label.setText(text.toString());
+            vbox.getChildren().add(label);
+        }
     }
 
     @FXML
@@ -246,7 +319,10 @@ public class GUIController {
     }
 
     @FXML
-    public void sourceClicked() {
+    public void sourceClicked() throws NewsAPIException {
+        vbox.getChildren().clear();
 
+        label.setText(ctrl.getMostArticles());
+        vbox.getChildren().add(label);
     }
 }
