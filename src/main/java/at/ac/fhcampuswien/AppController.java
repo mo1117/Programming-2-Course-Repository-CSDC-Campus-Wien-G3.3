@@ -76,6 +76,11 @@ public class AppController {
         return articlesNew;
     }
 
+    public List<Article> currentList() {
+        return this.articles;
+    }
+
+
     public List<Article> getAllNewsBitcoin() {
         resetNewsApi();
         NewsApi.endpointEnum = EndpointEnum.everything;
@@ -125,13 +130,48 @@ public class AppController {
     }
 
     public String getNYT() {
+
         return String.valueOf(articles.stream().filter(a -> {
             try {
-                return a.getUrl().contains("nytimes.com");
+                return a.getUrl().contains("reuters.com");
             } catch (NewsAPIException e) {
                 System.out.println(e.getMessage());
                 return false;
             }
         }).count());
+
     }
+
+    public List<Article> getHeadlineSmallerFifteen(List<Article> list) {
+        return list.stream()
+                .filter(article -> {
+                    try {
+                        return article.getTitle().length() < 15;
+                    } catch (NewsAPIException e) {
+                        e.printStackTrace();
+                        return false;
+                    }
+                })
+                .collect(Collectors.toList());
+    }
+
+    public List<Article> SortByDescriptionLength() {
+/*
+        return articles.stream()
+                .mapToInt(article -> {
+                    try {
+                        return article.getDescription.length();
+                    } catch (NewsAPIException e) {
+                        return 0;
+                    }
+                })
+                .sorted(Comparator.comparing(Article::getDescriptionLength))
+                .collect(Collectors.toList());
+  */
+        return null;
+
+    }
+
+
+
 }

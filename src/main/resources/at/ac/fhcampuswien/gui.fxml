@@ -81,5 +81,30 @@
             <font>
                 <Font name="Verdana" size="18.0" />
             </font></Button>
+        <Button fx:id="fifteen" layoutX="20.0" layoutY="35.0" minWidth="90.0" mnemonicParsing="false" onAction="#fifteenClicked" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: black;" text="Fifteen" visible="false">
+        <font>
+            <Font name="Verdana" size="14.0" />
+        </font>
+    </Button>
+        <Button fx:id="provider" layoutX="20.0" layoutY="112.0" minWidth="90.0" mnemonicParsing="false" onAction="#providerClicked" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: black;" text="Provider" visible="false">
+            <font>
+                <Font name="Verdana" size="14.0" />
+            </font>
+        </Button>
+        <Button fx:id="author" layoutX="20.0" layoutY="150.0" minWidth="90.0" mnemonicParsing="false" onAction="#authorClicked" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: black;" text="Author" visible="false">
+            <font>
+                <Font name="Verdana" size="14.0" />
+            </font>
+        </Button>
+        <Button fx:id="source" layoutX="20.0" layoutY="188.0" minWidth="90.0" mnemonicParsing="false" onAction="#sourceClicked" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: black;" text="Source" visible="false">
+            <font>
+                <Font name="Verdana" size="14.0" />
+            </font>
+        </Button>
+        <Button fx:id="desLength" layoutX="20.0" layoutY="72.0" minWidth="90.0" mnemonicParsing="false" onAction="#desLengthClicked" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: black;" text="DesLength" visible="false">
+            <font>
+                <Font name="Verdana" size="14.0" />
+            </font>
+        </Button>
     </children>
 </AnchorPane>

@@ -42,10 +42,32 @@ public class GUIController {
     private Button downloadArticle = new Button();
 
     @FXML
+    private Button fifteen = new Button();
+
+    @FXML
+    private Button provider = new Button();
+
+    @FXML
+    private Button author= new Button();
+
+    @FXML
+    private Button source = new Button();
+
+    @FXML
+    private Button desLength = new Button();
+
+
+
+    @FXML
     public void buttonHeadlinesAustriaClicked() {
         vbox.setVisible(true);
         seeArticle.setVisible(true);
         downloadArticle.setVisible(true);
+        fifteen.setVisible(true);
+        provider.setVisible(true);
+        source.setVisible(true);
+        author.setVisible(true);
+        desLength.setVisible(true);
         //Left Button is invisible if we are on page 1 - topHeadlines = true because we are looking at the topHeadlines
         //if we changed from bitcoinNews to topHeadlines - set count to 0
 
@@ -81,6 +103,11 @@ public class GUIController {
         vbox.setVisible(true);
         seeArticle.setVisible(true);
         downloadArticle.setVisible(true);
+        fifteen.setVisible(true);
+        provider.setVisible(true);
+        source.setVisible(true);
+        author.setVisible(true);
+        desLength.setVisible(true);
         //Left Button is invisible if we are on page 1 - bitcoin = true because we are looking at the bitcoin news
         //If we changed from topHeadlines to bitcoinNews - set count to 0
 
@@ -135,6 +162,11 @@ public class GUIController {
         downloadArticle.setVisible(false);
         buttonRight.setVisible(false);
         buttonLeft.setVisible(false);
+        fifteen.setVisible(false);
+        provider.setVisible(false);
+        source.setVisible(false);
+        author.setVisible(false);
+        desLength.setVisible(false);
         vbox.getChildren().clear();
         try {
             label.setText("There are currently " + (ctrl.getArticleCount()) + " Article(s) available!");
@@ -182,5 +214,39 @@ public class GUIController {
     public void buttonQuitClicked() {
         stage = (Stage) buttonQuit.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    public void fifteenClicked() {
+        vbox.getChildren().clear();
+        ctrl.getHeadlineSmallerFifteen(ctrl.currentList());
+
+    }
+
+
+    @FXML
+    public void desLengthClicked() {
+        vbox.getChildren().clear();
+    }
+
+    @FXML
+    public void authorClicked() {
+        vbox.getChildren().clear();
+
+        label.setText(ctrl.getLongestAuthorName());
+        vbox.getChildren().add(label);
+    }
+
+    @FXML
+    public void providerClicked() {
+        vbox.getChildren().clear();
+
+        label.setText(ctrl.getNYT());
+        vbox.getChildren().add(label);
+    }
+
+    @FXML
+    public void sourceClicked() {
+
     }
 }
