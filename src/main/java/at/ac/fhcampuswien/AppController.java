@@ -98,13 +98,13 @@ public class AppController {
         return this.articles;
     }
 
-    public String getMostArticles() {
+    public String getMostArticles() throws NewsAPIException {
 
 
         List<String> sources = new ArrayList<String>(20);
 
         int count = 0;
-        for (int i = 0; i < articles.size() - 1; i++) {
+        for (int i = 0; i < articles.size()-1; i++) {
             try {
                 sources.add(count, articles.get(i).getAuthor());
                 count++;
@@ -113,11 +113,16 @@ public class AppController {
             }
         }
 
-        return sources.stream()
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
-                .entrySet().stream()
-                .max(Map.Entry.comparingByValue()).map(Map.Entry::getKey)
-                .orElse(null);
+
+        Map<String, Long> temp = sources.stream()
+                .collect(Collectors.groupingBy(a -> a, Collectors.counting()));
+
+
+        return new HashSet<>(temp.values()).size() < temp.size() ?
+                null : temp.entrySet()
+                .stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey).get();
 
     }
 
@@ -134,10 +139,9 @@ public class AppController {
             try {
                 return article.getAuthor();
             } catch (NewsAPIException e) {
-                System.out.println(e.getMessage());
                 return "";
             }
-        }).reduce((name1, name2) -> name1.length() >= name2.length() ? name1 : name2);
+        }).reduce((name1,name2 ) -> name1.length() >= name2.length() ? name1 : name2);
 
         return name.get();
     }
@@ -156,6 +160,7 @@ public class AppController {
     }
 
     public List<Article> getHeadlineSmallerFifteen(List<Article> list) {
+
         return list.stream()
                 .filter(article -> {
                     try {
@@ -170,9 +175,12 @@ public class AppController {
 
     public List<Article> SortByDescriptionLength(List<Article> list) {
 
-            return list.stream()
-                    .sorted(Comparator.comparingInt(Article::getDescriptionLength))
-                    .collect(Collectors.toList());
+        return list.stream()
+                .sorted()
+                .collect(Collectors.toList());
 
     }
+
+
+
 }

@@ -1,15 +1,53 @@
 package at.ac.fhcampuswien;
 
+import java.util.Locale;
+
 public class Article {
     private String title;
     private String author;
     private String description;
     private String url;
 
-    public Article(String author, String title) {
+    //Builder Pattern
+    private Article(Builder builder) {
+        this.title = builder.title;
+        this.author = builder.author;
+        this.description = builder.description;
+        this.url = builder.url;
+    }
+
+    public static class Builder {
+        private String title;
+        private String author;
+        private String description;
+        private String url;
+
+        public Builder(String title, String author) {
+            this.title = title;
+            this.author = author;
+        }
+
+        public Builder description(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public Builder url(String url){
+            this.url = url;
+            return this;
+        }
+
+        public Article build() {
+            return new Article(this);
+        }
+    }
+
+
+   /* public Article(String author, String title) {
         this.author = author;
         this.title = title;
-    }
+    }*/
+
 
     public String getAuthor() throws NewsAPIException {
         if (this.author == null)

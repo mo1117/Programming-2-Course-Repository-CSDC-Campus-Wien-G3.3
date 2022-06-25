@@ -343,7 +343,7 @@ public class GUIController {
     }
 
     @FXML
-    public void sourceClicked() {
+    public void sourceClicked() throws NewsAPIException { //Falls Fehler ist throws entfernen
         buttonLeft.setVisible(false);
         buttonRight.setVisible(false);
         vbox.getChildren().clear();
