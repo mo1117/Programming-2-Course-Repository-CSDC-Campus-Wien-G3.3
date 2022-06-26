@@ -1,5 +1,6 @@
 package at.ac.fhcampuswien;
 
+import at.ac.fhcampuswien.downloader.Downloader;
 import at.ac.fhcampuswien.enums.CountryEnum;
 import at.ac.fhcampuswien.enums.EndpointEnum;
 
@@ -7,6 +8,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class AppController {
 
@@ -16,6 +18,20 @@ public class AppController {
 
     public AppController() {
         this.articles = null;
+    }
+
+
+    public int downloadURLs(Downloader downloader) throws NewsAPIException {
+        if (this.articles == null)
+            throw new NewsAPIException();
+
+        List<String> urls = new ArrayList<>();
+
+        urls = this.articles.stream()
+                .map(Article::getUrl)
+                .toList();
+
+        return downloader.process(urls);
     }
 
     public void generateMockList() {
@@ -170,9 +186,9 @@ public class AppController {
 
     public List<Article> SortByDescriptionLength(List<Article> list) {
         try {
-            return list.stream()
-                    .sorted(Comparator.comparingInt(Article::getDescriptionLength))
-                    .collect(Collectors.toList());
+        return list.stream()
+                .sorted(Comparator.comparingInt(Article::getDescriptionLength))
+                .collect(Collectors.toList());
         } catch (Exception e) {
             e.printStackTrace();
             return null;

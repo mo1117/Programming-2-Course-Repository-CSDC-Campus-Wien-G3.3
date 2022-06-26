@@ -5,6 +5,7 @@ public class Article {
     private String author;
     private String description;
     private String url;
+    private String urlToImage;
 
     public Article(String author, String title) {
         this.author = author;
