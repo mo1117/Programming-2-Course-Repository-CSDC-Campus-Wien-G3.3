@@ -1,11 +1,11 @@
 package at.ac.fhcampuswien;
 
+import at.ac.fhcampuswien.downloader.Downloader;
 import at.ac.fhcampuswien.enums.CountryEnum;
 import at.ac.fhcampuswien.enums.EndpointEnum;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class AppController {
@@ -13,6 +13,21 @@ public class AppController {
     private List<Article> articles;
     private NewsResponse newsResponse;
     private NewsApi newsApi = new NewsApi();
+
+    // Method is needed for exercise 4 - ignore for exercise 3 solution
+    // returns number of downloaded article urls
+    public int downloadURLs(Downloader downloader) throws NewsAPIException{
+        if( articles == null)
+            throw new NewsAPIException();
+
+        List<String> urls = new ArrayList<>();
+
+        urls = this.articles.stream()
+                .map(Article::getUrl)
+                .collect(Collectors.toList());
+
+        return downloader.process(urls);
+    }
 
     /*
     public AppController() {

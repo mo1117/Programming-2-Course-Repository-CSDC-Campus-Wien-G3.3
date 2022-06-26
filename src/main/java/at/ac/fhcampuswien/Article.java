@@ -1,12 +1,12 @@
 package at.ac.fhcampuswien;
 
-import java.util.Locale;
-
 public class Article {
     private final String title;
     private final String author;
     private final String description;
     private final String url;
+    private final String urlImage;
+
 
     //Builder Pattern
     private Article(Builder builder) {
@@ -14,6 +14,7 @@ public class Article {
         this.author = builder.author;
         this.description = builder.description;
         this.url = builder.url;
+        this.urlImage = builder.urlImage;
     }
 
     public static class Builder {
@@ -21,6 +22,7 @@ public class Article {
         private final String author;
         private String description;
         private String url;
+        private String urlImage;
 
         public Builder(String title, String author) {
             this.title = title;
