@@ -14,8 +14,23 @@ public class AppController {
     private NewsResponse newsResponse;
     private NewsApi newsApi = new NewsApi();
 
+    /*
     public AppController() {
         this.articles = null;
+    }
+    */
+
+
+    //Singleton
+    private static AppController instance = null;
+
+    private AppController() {}
+
+    public static AppController getInstance() {
+        if(instance == null) {
+            instance = new AppController();
+        }
+        return instance;
     }
 
     public void generateMockList() {

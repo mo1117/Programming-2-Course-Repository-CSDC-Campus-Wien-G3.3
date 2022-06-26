@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Menu{
 
-    private AppController controller = new AppController();
+    private AppController controller = AppController.getInstance();
 
     private static final String INVALID_INPUT_MESSAGE = "Invalid Input!";
     private static final String EXIT_MESSAGE = "Bye Bye!";

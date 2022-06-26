@@ -14,7 +14,7 @@ import java.util.List;
 
 public class GUIController {
 
-    private AppController ctrl = new AppController();
+    private AppController ctrl = AppController.getInstance();
     private List<Article> articles;
     private Stage stage;
     private int count = 0;
