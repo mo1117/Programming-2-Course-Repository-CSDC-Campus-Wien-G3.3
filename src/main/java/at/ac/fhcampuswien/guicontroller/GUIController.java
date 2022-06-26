@@ -214,12 +214,12 @@ public class GUIController {
             long startSequential = System.currentTimeMillis();
             int resultSequential = ctrl.downloadURLs(new SequentialDownloader());
             long endSequential = System.currentTimeMillis();
-            System.out.println("Took " + (endSequential - startSequential) + " ms!");
+            System.out.println("Downloading sequentially took " + (endSequential - startSequential) + " ms!");
 
             long startParallel = System.currentTimeMillis();
             int resultParallel = ctrl.downloadURLs(new ParallelDownloader());
             long endParallel = System.currentTimeMillis();
-            System.out.println("Took " + (endParallel - startParallel) + " ms!");
+            System.out.println("Downloading parallel took " + (endParallel - startParallel) + " ms!");
         } catch (NewsAPIException e) {
             System.out.println(e.getMessage());
         }

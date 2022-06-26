@@ -21,6 +21,7 @@ public class ParallelDownloader extends Downloader {
         //the threadpool
         ExecutorService threadPool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
+        //To download
         List<Future<String>> downloads = new ArrayList<>();
 
         try {
