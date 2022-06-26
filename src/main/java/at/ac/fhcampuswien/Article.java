@@ -3,10 +3,10 @@ package at.ac.fhcampuswien;
 import java.util.Locale;
 
 public class Article {
-    private String title;
-    private String author;
-    private String description;
-    private String url;
+    private final String title;
+    private final String author;
+    private final String description;
+    private final String url;
 
     //Builder Pattern
     private Article(Builder builder) {
@@ -17,8 +17,8 @@ public class Article {
     }
 
     public static class Builder {
-        private String title;
-        private String author;
+        private final String title;
+        private final String author;
         private String description;
         private String url;
 
