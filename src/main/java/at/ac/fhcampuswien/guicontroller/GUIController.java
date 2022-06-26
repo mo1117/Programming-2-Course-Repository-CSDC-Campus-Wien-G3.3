@@ -146,7 +146,7 @@ public class GUIController {
     @FXML
     public void buttonLeftClicked() {
         this.count--;
-        if(this.fifteenBool)
+        if (this.fifteenBool)
             fifteenClicked();
         else if (this.descriptionLength)
             desLengthClicked();
@@ -159,7 +159,7 @@ public class GUIController {
     @FXML
     public void buttonRightClicked() {
         this.count++;
-        if(this.fifteenBool)
+        if (this.fifteenBool)
             fifteenClicked();
         else if (this.descriptionLength)
             desLengthClicked();
@@ -209,17 +209,18 @@ public class GUIController {
     }
 
     @FXML
-    private void downloadURLs(){
+    private void downloadURLs() {
         try {
+            long startSequential = System.currentTimeMillis();
             int resultSequential = ctrl.downloadURLs(new SequentialDownloader());
-            // TODO print time in ms it took to download URLs sequentially
+            long endSequential = System.currentTimeMillis();
+            System.out.println("Took " + (endSequential - startSequential) + " ms!");
 
-            // TODO implement the process() function in ParallelDownloader class
+            long startParallel = System.currentTimeMillis();
             int resultParallel = ctrl.downloadURLs(new ParallelDownloader());
-
-            // TODO print time in ms it took to download URLs parallel
-
-        } catch (NewsAPIException e){
+            long endParallel = System.currentTimeMillis();
+            System.out.println("Took " + (endParallel - startParallel) + " ms!");
+        } catch (NewsAPIException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -234,7 +235,7 @@ public class GUIController {
     public void fifteenClicked() {
         //reset count
         //this boolean is used for the buttons
-        if(!this.fifteenBool)
+        if (!this.fifteenBool)
             count = 0;
 
         if (this.count == 0)
@@ -258,8 +259,7 @@ public class GUIController {
                 buttonRight.setVisible(false);
             if (articles.size() == 0)
                 buttonRight.setVisible(false);
-        }
-        else {
+        } else {
             this.articles = ctrl.getHeadlineSmallerFifteen(ctrl.getTopHeadlinesAustria());
             if (this.articles.size() != 0)
                 text.append(this.articles.get(this.count));
@@ -269,11 +269,11 @@ public class GUIController {
                 buttonRight.setVisible(false);
             if (articles.size() == 0)
                 buttonRight.setVisible(false);
-            }
-
-            label.setText(text.toString());
-            vbox.getChildren().add(label);
         }
+
+        label.setText(text.toString());
+        vbox.getChildren().add(label);
+    }
 
 
     @FXML

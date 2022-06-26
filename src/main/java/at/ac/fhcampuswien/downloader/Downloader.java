@@ -26,6 +26,7 @@ public abstract class Downloader {
             URL url4download = new URL(urlString);  // Convert string to URL
             is = url4download.openStream();
             fileName = urlString.substring(urlString.lastIndexOf('/') + 1); // extract filename
+            fileName = fileName.replaceAll("[!?=&#*%]","");
 
             if (fileName.isEmpty()) {
                 fileName = url4download.getHost() + HTML_EXTENSION; // if no filename could be extracted use the URL host and .html extension

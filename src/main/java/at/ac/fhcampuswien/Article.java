@@ -83,6 +83,10 @@ public class Article {
             return this.url;
     }
 
+    public String getUrlToImage(){
+        return this.urlToImage;
+    }
+
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
