@@ -14,7 +14,7 @@ import java.util.List;
 
 public class GUIController {
 
-    private AppController ctrl = new AppController();
+    private AppController ctrl = AppController.getInstance();
     private List<Article> articles;
     private Stage stage;
     private int count = 0;
@@ -343,7 +343,7 @@ public class GUIController {
     }
 
     @FXML
-    public void sourceClicked() {
+    public void sourceClicked() throws NewsAPIException { //Falls Fehler ist throws entfernen
         buttonLeft.setVisible(false);
         buttonRight.setVisible(false);
         vbox.getChildren().clear();

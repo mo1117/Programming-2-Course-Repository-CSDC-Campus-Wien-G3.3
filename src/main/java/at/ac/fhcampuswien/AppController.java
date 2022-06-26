@@ -1,6 +1,5 @@
 package at.ac.fhcampuswien;
 
-import at.ac.fhcampuswien.downloader.Downloader;
 import at.ac.fhcampuswien.enums.CountryEnum;
 import at.ac.fhcampuswien.enums.EndpointEnum;
 
@@ -8,7 +7,6 @@ import java.io.IOException;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class AppController {
 
@@ -16,22 +14,23 @@ public class AppController {
     private NewsResponse newsResponse;
     private NewsApi newsApi = new NewsApi();
 
+    /*
     public AppController() {
         this.articles = null;
     }
+    */
 
 
-    public int downloadURLs(Downloader downloader) throws NewsAPIException {
-        if (this.articles == null)
-            throw new NewsAPIException();
+    //Singleton
+    private static AppController instance = null;
 
-        List<String> urls = new ArrayList<>();
+    private AppController() {}
 
-        urls = this.articles.stream()
-                .map(Article::getUrl)
-                .toList();
-
-        return downloader.process(urls);
+    public static AppController getInstance() {
+        if(instance == null) {
+            instance = new AppController();
+        }
+        return instance;
     }
 
     public void generateMockList() {
@@ -114,13 +113,13 @@ public class AppController {
         return this.articles;
     }
 
-    public String getMostArticles() {
+    public String getMostArticles() throws NewsAPIException {
 
 
         List<String> sources = new ArrayList<String>(20);
 
         int count = 0;
-        for (int i = 0; i < articles.size() - 1; i++) {
+        for (int i = 0; i < articles.size()-1; i++) {
             try {
                 sources.add(count, articles.get(i).getAuthor());
                 count++;
@@ -129,11 +128,16 @@ public class AppController {
             }
         }
 
-        return sources.stream()
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
-                .entrySet().stream()
-                .max(Map.Entry.comparingByValue()).map(Map.Entry::getKey)
-                .orElse(null);
+
+        Map<String, Long> temp = sources.stream()
+                .collect(Collectors.groupingBy(a -> a, Collectors.counting()));
+
+
+        return new HashSet<>(temp.values()).size() < temp.size() ?
+                null : temp.entrySet()
+                .stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey).get();
 
     }
 
@@ -150,10 +154,9 @@ public class AppController {
             try {
                 return article.getAuthor();
             } catch (NewsAPIException e) {
-                System.out.println(e.getMessage());
                 return "";
             }
-        }).reduce((name1, name2) -> name1.length() >= name2.length() ? name1 : name2);
+        }).reduce((name1,name2 ) -> name1.length() >= name2.length() ? name1 : name2);
 
         return name.get();
     }
@@ -172,6 +175,7 @@ public class AppController {
     }
 
     public List<Article> getHeadlineSmallerFifteen(List<Article> list) {
+
         return list.stream()
                 .filter(article -> {
                     try {
@@ -185,13 +189,13 @@ public class AppController {
     }
 
     public List<Article> SortByDescriptionLength(List<Article> list) {
-        try {
+
         return list.stream()
-                .sorted(Comparator.comparingInt(Article::getDescriptionLength))
+                .sorted()
                 .collect(Collectors.toList());
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+
     }
+
+
+
 }
