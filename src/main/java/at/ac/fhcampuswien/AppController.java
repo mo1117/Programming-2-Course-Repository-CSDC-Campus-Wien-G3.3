@@ -16,14 +16,21 @@ public class AppController {
 
     // Method is needed for exercise 4 - ignore for exercise 3 solution
     // returns number of downloaded article urls
-    public int downloadURLs(Downloader downloader) throws NewsAPIException{
-        if( articles == null)
+    public int downloadURLs(Downloader downloader) throws NewsAPIException {
+        if (articles == null)
             throw new NewsAPIException();
 
         List<String> urls = new ArrayList<>();
 
         urls = this.articles.stream()
-                .map(Article::getUrl)
+                .map(x -> {
+                    try {
+                        return x.getUrl();
+                    } catch (NewsAPIException e) {
+                        System.out.println(e.getMessage());
+                        return null;
+                    }
+                })
                 .collect(Collectors.toList());
 
         return downloader.process(urls);
@@ -39,10 +46,11 @@ public class AppController {
     //Singleton
     private static AppController instance = null;
 
-    private AppController() {}
+    private AppController() {
+    }
 
     public static AppController getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new AppController();
         }
         return instance;
@@ -134,7 +142,7 @@ public class AppController {
         List<String> sources = new ArrayList<String>(20);
 
         int count = 0;
-        for (int i = 0; i < articles.size()-1; i++) {
+        for (int i = 0; i < articles.size() - 1; i++) {
             try {
                 sources.add(count, articles.get(i).getAuthor());
                 count++;
@@ -171,7 +179,7 @@ public class AppController {
             } catch (NewsAPIException e) {
                 return "";
             }
-        }).reduce((name1,name2 ) -> name1.length() >= name2.length() ? name1 : name2);
+        }).reduce((name1, name2) -> name1.length() >= name2.length() ? name1 : name2);
 
         return name.get();
     }
@@ -210,7 +218,6 @@ public class AppController {
                 .collect(Collectors.toList());
 
     }
-
 
 
 }

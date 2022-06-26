@@ -39,7 +39,7 @@ public class GUIController {
     private Button seeArticle = new Button();
 
     @FXML
-    private Button downloadArticle = new Button();
+    private Button downloadArticles = new Button();
 
     @FXML
     private Button fifteen = new Button();
@@ -61,7 +61,7 @@ public class GUIController {
     public void buttonHeadlinesAustriaClicked() {
         vbox.setVisible(true);
         seeArticle.setVisible(true);
-        downloadArticle.setVisible(true);
+        downloadArticles.setVisible(true);
         fifteen.setVisible(true);
         provider.setVisible(true);
         source.setVisible(true);
@@ -103,7 +103,7 @@ public class GUIController {
     public void buttonBitcoinClicked() {
         vbox.setVisible(true);
         seeArticle.setVisible(true);
-        downloadArticle.setVisible(true);
+        downloadArticles.setVisible(true);
         fifteen.setVisible(true);
         provider.setVisible(true);
         source.setVisible(true);
@@ -170,7 +170,7 @@ public class GUIController {
     @FXML
     public void buttonCountClicked() {
         seeArticle.setVisible(false);
-        downloadArticle.setVisible(false);
+        downloadArticles.setVisible(false);
         buttonRight.setVisible(false);
         buttonLeft.setVisible(false);
         fifteen.setVisible(false);
@@ -207,7 +207,7 @@ public class GUIController {
     }
 
     @FXML
-    public void downloadArticleClicked() {
+    public void downloadArticlesClicked() {
         //Code for textfile download here
         try {
             BufferedWriter writer;

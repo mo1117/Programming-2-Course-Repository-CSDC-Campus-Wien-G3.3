@@ -5,7 +5,7 @@ public class Article {
     private final String author;
     private final String description;
     private final String url;
-    private final String urlImage;
+    private final String urlToImage;
 
 
     //Builder Pattern
@@ -14,7 +14,7 @@ public class Article {
         this.author = builder.author;
         this.description = builder.description;
         this.url = builder.url;
-        this.urlImage = builder.urlImage;
+        this.urlToImage = builder.urlToImage;
     }
 
     public static class Builder {
@@ -22,7 +22,7 @@ public class Article {
         private final String author;
         private String description;
         private String url;
-        private String urlImage;
+        private String urlToImage;
 
         public Builder(String title, String author) {
             this.title = title;
