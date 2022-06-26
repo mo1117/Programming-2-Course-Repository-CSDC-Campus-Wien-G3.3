@@ -3,6 +3,8 @@ package at.ac.fhcampuswien.guicontroller;
 import at.ac.fhcampuswien.AppController;
 import at.ac.fhcampuswien.Article;
 import at.ac.fhcampuswien.NewsAPIException;
+import at.ac.fhcampuswien.downloader.ParallelDownloader;
+import at.ac.fhcampuswien.downloader.SequentialDownloader;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -207,23 +209,17 @@ public class GUIController {
     }
 
     @FXML
-    public void downloadArticlesClicked() {
-        //Code for textfile download here
+    private void downloadURLs(){
         try {
-            BufferedWriter writer;
-            if (this.topHeadlines) {
-                writer = new BufferedWriter(new FileWriter(ctrl.getTopHeadlinesAustria().get(this.count).getTitle() + ".txt"));
-                writer.write(ctrl.getTopHeadlinesAustria().get(this.count).toString());
-                System.out.println("Check the folder where this project is stored!");
-            } else {
-                writer = new BufferedWriter(new FileWriter(ctrl.getAllNewsBitcoin().get(this.count).getTitle() + ".txt"));
-                writer.write(ctrl.getAllNewsBitcoin().get(this.count).toString());
-                System.out.println("Check the folder where this project is stored!");
-            }
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (NewsAPIException e) {
+            int resultSequential = ctrl.downloadURLs(new SequentialDownloader());
+            // TODO print time in ms it took to download URLs sequentially
+
+            // TODO implement the process() function in ParallelDownloader class
+            int resultParallel = ctrl.downloadURLs(new ParallelDownloader());
+
+            // TODO print time in ms it took to download URLs parallel
+
+        } catch (NewsAPIException e){
             System.out.println(e.getMessage());
         }
     }
