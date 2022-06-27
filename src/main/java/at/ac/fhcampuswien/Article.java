@@ -39,6 +39,11 @@ public class Article {
             return this;
         }
 
+        public Builder urlToImage(String urlToImage){
+            this.urlToImage = urlToImage;
+            return this;
+        }
+
         public Article build() {
             return new Article(this);
         }
